@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.2+'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+        resourcePackageName "net.neonlotus.lazywizard"
+    }
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "net.neonlotus.lazywizard"
+        minSdkVersion 15
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.joanzapata.android:android-iconify:1.0.6+'
+    apt "org.androidannotations:androidannotations:3.0+"
+    // add these
+    compile 'org.androidannotations:androidannotations-api:3.0+'
+    // two lines
+    compile files('libs/ActiveAndroid-3.3.jar')
+    compile 'com.github.traex.expandablelayout:library:1.2.2'
+    compile 'com.googlecode.android-wheel:datetime-picker:1.1'
+    compile 'com.nispok:snackbar:2.9.1'
+    compile 'com.android.support:appcompat-v7:21.0.0+'
+    compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.1'
+    compile 'com.afollestad:material-dialogs:0.6.3.1'
+}

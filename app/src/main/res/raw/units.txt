@@ -1,0 +1,52 @@
+{
+    "category": [
+        {
+            "id": "0",
+            "name": "Minions",
+            "count": "0",
+            "cost": "1"
+        },
+        {
+            "id": "1",
+            "name": "Jellies",
+            "count": "0",
+            "cost": "2"
+        },
+        {
+            "id": "2",
+            "name": "Skelebros",
+            "count": "0",
+            "cost": "4"
+        },
+        {
+            "id": "3",
+            "name": "Cup Bearers",
+            "count": "0",
+            "cost": "8"
+        },
+        {
+            "id": "4",
+            "name": "Whelps",
+            "count": "0",
+            "cost": "16"
+        },
+        {
+            "id": "5",
+            "name": "Monoliths",
+            "count": "0",
+            "cost": "32"
+        },
+        {
+            "id": "6",
+            "name": "Farmers",
+            "count": "0",
+            "cost": "64"
+        },
+        {
+            "id": "7",
+            "name": "Mules",
+            "count": "0",
+            "cost": "128"
+        },
+    ]
+}

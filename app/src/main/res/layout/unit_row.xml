@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rlRow"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Name: "
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@+id/tvName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+
+        >
+
+        <IconButton
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="{fa-usd}"
+            android:id="@+id/btnBuy"
+             />
+
+        <IconButton
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="{fa-arrow-up}"
+            android:id="@+id/btnUp"
+             />
+
+        <IconButton
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="{fa-info}"
+            android:id="@+id/btnStats"
+             />
+    </LinearLayout>
+
+</RelativeLayout>

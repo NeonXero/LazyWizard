@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rlCurrency"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Souls: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tvSouls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Count"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCurrency"
+            android:background="@drawable/dotted"
+            android:paddingTop="5dp"
+            android:visibility="gone"
+            android:weightSum="5">
+
+            <Button
+                android:id="@+id/topUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#80000000"
+
+                android:text="Units" />
+
+            <Button
+                android:id="@+id/topLab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/topUnits"
+                android:layout_toRightOf="@id/topUnits"
+                android:layout_weight="1"
+                android:background="#80000000"
+                android:text="Lab" />
+
+            <Button
+                android:id="@+id/topArcane"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/topUnits"
+                android:layout_toRightOf="@id/topLab"
+                android:layout_weight="1"
+                android:background="#80000000"
+                android:text="Arcane" />
+
+
+            <Button
+                android:id="@+id/topBattle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/topUnits"
+                android:layout_toRightOf="@id/topArcane"
+                android:layout_weight="1"
+                android:background="#80000000"
+                android:text="Battle" />
+
+            <Button
+                android:id="@+id/topStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/topUnits"
+                android:layout_toRightOf="@id/topBattle"
+                android:layout_weight="1"
+                android:background="#80000000"
+                android:text="Stats" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlCurrency">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp" />
+
+    </android.support.v4.view.ViewPager>
+
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlCurrency"
+        tools:context=".MainActivity"
+        android:visibility="gone"
+        tools:ignore="MergeRootFrame" />
+
+
+</RelativeLayout>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- NOTE: order is important (the first matching state(s) is what is rendered) -->
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/selected" />
+    <item
+        android:drawable="@drawable/unselected" />
+    <item android:drawable="@drawable/selected"
+        android:state_focused="true" />
+</selector>
+
+
+    <!-- pressed is when you touch it
+        no state is just when it's sitting there
+-->

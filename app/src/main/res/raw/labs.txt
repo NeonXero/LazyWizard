@@ -1,0 +1,22 @@
+{
+    "tech": [
+        {
+            "id": "0",
+            "name": "Minion Hats",
+            "learned": "0",
+            "cost": "10"
+        },
+        {
+            "id": "1",
+            "name": "Jelly Coats",
+            "learned": "0",
+            "cost": "20"
+        },
+        {
+            "id": "2",
+            "name": "Skelebro Sticks",
+            "learned": "0",
+            "cost": "40"
+        }
+    ]
+}

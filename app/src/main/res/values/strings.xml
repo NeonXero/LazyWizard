@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Lazy Wizard</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="category">
+        <item>Minions</item>
+        <item>Jellies</item>
+        <item>Skelebros</item>
+        <item>Cup Bearers</item>
+        <item>Whelps</item>
+        <item>Monoliths</item>
+        <item>Farmers</item>
+        <item>Mules</item>
+    </string-array>
+
+</resources>
