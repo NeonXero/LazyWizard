@@ -58,9 +58,6 @@ public class TestFragment extends Fragment {
         lvUnits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                SnackbarManager.show(
-//                        Snackbar.with(getActivity())
-//                                .text("POS "+position));
                 /*AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getActivity());
                 builder.setTitle(unitList.get(position).name).
                         setMessage("Message Body").

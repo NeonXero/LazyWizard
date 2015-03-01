@@ -22,6 +22,7 @@ import net.neonlotus.lazywizard.Fragments.Fragment_Unit_;
 import net.neonlotus.lazywizard.Fragments.TestFragment;
 import net.neonlotus.lazywizard.activeandroid.Category;
 import net.neonlotus.lazywizard.activeandroid.Item;
+import net.neonlotus.lazywizard.activeandroid.Unit;
 import net.neonlotus.lazywizard.appliation.App;
 import net.neonlotus.lazywizard.appliation.MainService;
 import net.neonlotus.lazywizard.appliation.Prefs_;
@@ -46,7 +47,7 @@ public class MainActivity extends FragmentActivity {
     @ViewById
     static TextView tvSouls;
 
-    @ViewById
+    /*@ViewById
     static Button topUnits;
     @ViewById
     static Button topLab;
@@ -55,7 +56,7 @@ public class MainActivity extends FragmentActivity {
     @ViewById
     static Button topBattle;
     @ViewById
-    static Button topStats;
+    static Button topStats;*/
 
     ActionBar ab;
     List<Item> itemList;
@@ -235,7 +236,7 @@ public class MainActivity extends FragmentActivity {
         tvSouls.setText(NumberFormat.getNumberInstance(Locale.US).format(souls));
     }
 
-    @Click(R.id.topUnits)
+    /*@Click(R.id.topUnits)
     void unitClick() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragmentUnit).commit();
@@ -293,9 +294,74 @@ public class MainActivity extends FragmentActivity {
         topBattle.setTextColor(Color.WHITE);
         topStats.setTextColor(Color.RED);
         ab.setTitle("Statistics");
-    }
+    }*/
 
     public void setupDB() {
+
+        //========================== UNITS
+        //================================
+        Category category = new Category();
+        category.name = "Unit";
+        category.save();
+
+        Unit unit = new Unit();
+        unit.category = category;
+        unit.name="Minion";
+        unit.cost=1;
+        unit.rate=1;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Wisp";
+        unit.cost=5;
+        unit.rate=2;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Jester";
+        unit.cost=10;
+        unit.rate=3;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Shaman";
+        unit.cost=25;
+        unit.rate=4;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Hex Master";
+        unit.cost=80;
+        unit.rate=5;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Shadowbeast";
+        unit.cost=150;
+        unit.rate=6;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Elemental";
+        unit.cost=225;
+        unit.rate=7;
+        unit.save();
+
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Necromancer";
+        unit.rate=8;
+        unit.cost=500;
+        unit.save();
+
+        //========================== ITEMS
+        //================================
         Category category = new Category();
         category.name = "Item";
         category.save();
