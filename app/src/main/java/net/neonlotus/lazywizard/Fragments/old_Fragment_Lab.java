@@ -1,30 +1,15 @@
 package net.neonlotus.lazywizard.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.activeandroid.query.Select;
 
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.activeandroid.Category;
-import net.neonlotus.lazywizard.activeandroid.Tech;
-import net.neonlotus.lazywizard.adapters.LabAdapter;
-import net.neonlotus.lazywizard.appliation.App;
-import net.neonlotus.lazywizard.appliation.Prefs_;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
-import java.util.List;
 
 @EFragment(R.layout.fragment_lab)
-public class Fragment_Lab extends Fragment {
+public class old_Fragment_Lab extends Fragment {
 
-    Context context = getActivity();
+    /*Context context = getActivity();
     @Pref
     Prefs_ prefs;
 
@@ -41,28 +26,28 @@ public class Fragment_Lab extends Fragment {
         int setupCount=0;
 
         if (prefs.techSetupCount().exists()) {
-            if (App.getInstance().getTechList() != null) {
-                if (App.getInstance().getTechList().size()>0) {
-                    labList = App.getInstance().getTechList(); //???
-                    App.getInstance().setTechList(labList);
+            if (MyApplication.getInstance().getTechList() != null) {
+                if (MyApplication.getInstance().getTechList().size()>0) {
+                    labList = MyApplication.getInstance().getTechList(); //???
+                    MyApplication.getInstance().setTechList(labList);
                 } else {
                     labList = getAll();
                 }
             } else {
                 labList = getAll();
-                App.getInstance().setTechList(labList);
+                MyApplication.getInstance().setTechList(labList);
             }
         } else {
             setupDB();
             labList = getAll();
-            App.getInstance().setTechList(labList);
+            MyApplication.getInstance().setTechList(labList);
         }
 
 
         prefs.techSetupCount().put(setupCount);
 
         //labAdapter = new LabAdapter(getActivity(), R.layout.unit_row, labList, Fragment_Lab.this);
-        labAdapter = new LabAdapter(getActivity(), R.layout.haxrow, labList, Fragment_Lab.this);
+        labAdapter = new LabAdapter(getActivity(), R.layout.haxrow, labList, old_Fragment_Lab.this);
         lvTech.setAdapter(labAdapter);
 
 
@@ -141,8 +126,8 @@ public class Fragment_Lab extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        App.getInstance().saveAll();
-    }
+        MyApplication.getInstance().saveAll();
+    }*/
 
 
 }

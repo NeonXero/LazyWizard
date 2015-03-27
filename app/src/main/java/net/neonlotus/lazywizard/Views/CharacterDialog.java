@@ -1,4 +1,4 @@
-package net.neonlotus.lazywizard.Views;
+package net.neonlotus.lazywizard.views;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.appliation.Prefs_;
+import net.neonlotus.lazywizard.application.Prefs_;
 
 /**
  * Created by Stankus on 11/27/2014.

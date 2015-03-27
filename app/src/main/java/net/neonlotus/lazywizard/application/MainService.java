@@ -1,22 +1,20 @@
-package net.neonlotus.lazywizard.appliation;
+package net.neonlotus.lazywizard.application;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-
-import net.neonlotus.lazywizard.MainActivity;
-import net.neonlotus.lazywizard.activeandroid.Unit;
+import android.util.Log;
 
 public class MainService extends Service {
     int total = 0;
 
-    @Override
+    /*@Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Prefs_ p = MainActivity.getPrefs();
 
-        //Log.d("ryan", "main 3 seconds");
+        Log.d("ryan", "main 3 seconds");
 
         // Query the database and show alarm if it applies
         if (p != null) {
@@ -28,10 +26,10 @@ public class MainService extends Service {
             }
 
 
-            if (App.getInstance().getUnitList() != null) {
-                if (App.getInstance().getUnitList().size() > 0) {
-                    for (int i = 0; i < App.getInstance().getUnitList().size(); i++) {
-                        Unit un = App.getInstance().getUnitList().get(i);
+            if (MyApplication.getInstance().getUnitList() != null) {
+                if (MyApplication.getInstance().getUnitList().size() > 0) {
+                    for (int i = 0; i < MyApplication.getInstance().getUnitList().size(); i++) {
+                        Unit un = MyApplication.getInstance().getUnitList().get(i);
                         long owned = un.owned;
                         long rate = un.rate;
                         long pay = owned * rate;
@@ -49,7 +47,7 @@ public class MainService extends Service {
         stopSelf();
 
         return START_NOT_STICKY;
-    }
+    }*/
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -58,7 +56,7 @@ public class MainService extends Service {
 
     @Override
     public void onDestroy() {
-
+        Log.d("ryan", "main 3 seconds");
         AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarm.set(
                 alarm.RTC_WAKEUP,

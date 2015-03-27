@@ -1,32 +1,14 @@
 package net.neonlotus.lazywizard.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.activeandroid.query.Select;
-
-import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.activeandroid.Item;
-import net.neonlotus.lazywizard.appliation.App;
-import net.neonlotus.lazywizard.appliation.Prefs_;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @EFragment(R.layout.fragment_battle)
-public class Fragment_Battle extends Fragment {
-
+public class old_Fragment_Battle extends Fragment {
+/*
     Context context = getActivity();
     int unitTotal, sending;
 
@@ -36,7 +18,7 @@ public class Fragment_Battle extends Fragment {
     private String[] arraySpinner;
 
 
-    /*@ViewById (R.id.unitLabel)
+    *//*@ViewById (R.id.unitLabel)
     TextView unitLabel;
     @ViewById
     TextView sendCount;
@@ -47,7 +29,7 @@ public class Fragment_Battle extends Fragment {
     @ViewById
     Button btnCharacter;
     @ViewById
-    TextView textView;*/
+    TextView textView;*//*
     @ViewById
     Button btnSaveName;
     @ViewById
@@ -72,12 +54,12 @@ public class Fragment_Battle extends Fragment {
                 "1", "2", "3", "4", "5"
         };
         //List<Item> itemList = getAll();
-        List<Item> itemList = App.getInstance().getItemList(); //naw
+        List<Item> itemList = MyApplication.getInstance().getItemList(); //naw
 
-        List<Item> headItems = App.getInstance().getHeadItems();
-        List<Item> armorItems = App.getInstance().getArmorItems();
-        List<Item> weaponItems = App.getInstance().getWeaponItems();
-        List<Item> accessoryItems = App.getInstance().getAccessoryItems();
+        List<Item> headItems = MyApplication.getInstance().getHeadItems();
+        List<Item> armorItems = MyApplication.getInstance().getArmorItems();
+        List<Item> weaponItems = MyApplication.getInstance().getWeaponItems();
+        List<Item> accessoryItems = MyApplication.getInstance().getAccessoryItems();
 
         List<String> itemNames = new ArrayList<String>();
         for (int i=0;i<itemList.size();i++) {
@@ -122,23 +104,23 @@ public class Fragment_Battle extends Fragment {
         // [ seek setup here ]
         //setupSeekBar();
 
-        /*btnStartBattle.setOnClickListener(new View.OnClickListener() {
+        *//*btnStartBattle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(),"Under construction", Toast.LENGTH_SHORT).show();
                 //doBattle(sending);
             }
-        });*/
+        });*//*
 
 
-/*
+*//*
 
         if (prefs.setupCount().exists()) {
             //Do nothing
         } else {
             //setupDB();
         }
-*/
+*//*
 
 
 //        prefs.setupCount().put(setupCount);
@@ -153,7 +135,7 @@ public class Fragment_Battle extends Fragment {
     }
 
 
-    /*public void doBattle(int total) {
+    *//*public void doBattle(int total) {
         int min = 0, jel = 0, ske = 0, cup = 0, whe = 0, mon = 0, far = 0, mul = 0;
         int us = 0;
 
@@ -217,18 +199,18 @@ public class Fragment_Battle extends Fragment {
         }
         setupSeekBar();
 
-    }*/
+    }*//*
 
-    /*public int fight() {
+    *//*public int fight() {
         Random randomGenerator = new Random();
         int a = randomGenerator.nextInt(3);
         return a;
-    }*/
+    }*//*
 
 
 
 
-    /*public void setupSeekBar() {
+    *//*public void setupSeekBar() {
         unitTotal = 0;
         for (int i=1;i<9;i++) {
             final Unit u = Unit.load(Unit.class,i);
@@ -259,14 +241,14 @@ public class Fragment_Battle extends Fragment {
                 //Toast.makeText(getActivity(), "seek bar progress:" + progressChanged, Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }*//*
 
-    /*@Click (R.id.btnCharacter)
+    *//*@Click (R.id.btnCharacter)
     void thing() {
         //Toast.makeText(getActivity(),"test",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(getActivity(), CharacterDialog.class);
         startActivity(intent);
-    }*/
+    }*//*
     @Click(R.id.btnSaveName)
     void saveName() {
         prefs.battleName().put(etWizName.getText().toString());
@@ -280,5 +262,5 @@ public class Fragment_Battle extends Fragment {
         } else {
             etWizName.setText("");
         }
-    }
+    }*/
 }

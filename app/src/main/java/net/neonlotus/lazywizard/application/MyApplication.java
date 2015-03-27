@@ -1,22 +1,32 @@
-package net.neonlotus.lazywizard.appliation;
+package net.neonlotus.lazywizard.application;
 
+import android.app.Application;
+
+import com.activeandroid.ActiveAndroid;
 
 import net.neonlotus.lazywizard.activeandroid.Item;
 import net.neonlotus.lazywizard.activeandroid.Tech;
 import net.neonlotus.lazywizard.activeandroid.Unit;
 
-import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
 import java.util.List;
 
-@EBean
-public class App {
-    @Pref
-    Prefs_ prefs;
 
-    //private static App mInstance = null;
-    static App mInstance = null;
+public class MyApplication extends Application {
+
+
+
+
+    public void onCreate() {
+        super.onCreate();
+        //initSomeStuff();
+        //dog = "dog";
+        ActiveAndroid.initialize(this);
+    }
+
+
+
+    //private static MyApplication mInstance = null;
+    static MyApplication mInstance = null;
 
     List<Unit> unitList;
     List<Tech> techList;
@@ -29,13 +39,13 @@ public class App {
 
     private int souls;
 
-    public App() {
+    /*public MyApplication() {
         //minionOwned = 0;
-    }
+    }*/
 
-    public static App getInstance() {
+    public static MyApplication getInstance() {
         if (mInstance == null) {
-            mInstance = new App();
+            mInstance = new MyApplication();
         }
         return mInstance;
     }
@@ -55,40 +65,40 @@ public class App {
     }
 
     public void saveAll() {
-        if (App.getInstance().getUnitList() != null) {
-            if (App.getInstance().getUnitList().size() > 0) {
-                for (int i = 0; i < App.getInstance().getUnitList().size(); i++) {
-                    final Unit uNit = App.getInstance().getUnitList().get(i);
+        if (unitList != null) {
+            if (unitList.size() > 0) {
+                for (int i = 0; i < unitList.size(); i++) {
+                    final Unit uNit = unitList.get(i);
                     uNit.save();
                 }
             }
         }
 
-        if (App.getInstance().getTechList() != null) {
-            if (App.getInstance().getTechList().size() > 0) {
-                for (int i = 0; i < App.getInstance().getTechList().size(); i++) {
-                    final Tech tEch = App.getInstance().getTechList().get(i);
+        /*if (MyApplication.getInstance().getTechList() != null) {
+            if (MyApplication.getInstance().getTechList().size() > 0) {
+                for (int i = 0; i < MyApplication.getInstance().getTechList().size(); i++) {
+                    final Tech tEch = MyApplication.getInstance().getTechList().get(i);
                     tEch.save();
                 }
             }
-        }
+        }*/
 
-        if (App.getInstance().getItemList() != null) {
-            if (App.getInstance().getItemList().size() > 0) {
-                for (int i = 0; i < App.getInstance().getItemList().size(); i++) {
-                    final Item iTem = App.getInstance().getItemList().get(i);
+       /* if (MyApplication.getInstance().getItemList() != null) {
+            if (MyApplication.getInstance().getItemList().size() > 0) {
+                for (int i = 0; i < MyApplication.getInstance().getItemList().size(); i++) {
+                    final Item iTem = MyApplication.getInstance().getItemList().get(i);
                     iTem.save();
                 }
             }
-        }
+        }*/
 
     }
 
-    public void clearAll() {
-        if (App.getInstance().getUnitList() != null) {
-            if (App.getInstance().getUnitList().size() > 0) {
-                for (int i = 0; i < App.getInstance().getUnitList().size(); i++) {
-                    final Unit uNit = App.getInstance().getUnitList().get(i);
+    /*public void clearAll() {
+        if (MyApplication.getInstance().getUnitList() != null) {
+            if (MyApplication.getInstance().getUnitList().size() > 0) {
+                for (int i = 0; i < MyApplication.getInstance().getUnitList().size(); i++) {
+                    final Unit uNit = MyApplication.getInstance().getUnitList().get(i);
                     uNit.owned = 0;
                     uNit.rate = 1;
                     uNit.cost = 1;
@@ -97,10 +107,10 @@ public class App {
             }
         }
 
-        if (App.getInstance().getTechList() != null) {
-            if (App.getInstance().getTechList().size() > 0) {
-                for (int i = 0; i < App.getInstance().getTechList().size(); i++) {
-                    final Tech tEch = App.getInstance().getTechList().get(i);
+        if (MyApplication.getInstance().getTechList() != null) {
+            if (MyApplication.getInstance().getTechList().size() > 0) {
+                for (int i = 0; i < MyApplication.getInstance().getTechList().size(); i++) {
+                    final Tech tEch = MyApplication.getInstance().getTechList().get(i);
                     tEch.owned = 0;
                     tEch.rate = 1;
                     tEch.cost = 1;
@@ -113,7 +123,7 @@ public class App {
             prefs.battleName().remove();
         }
 
-    }
+    }*/
 
     public List<Unit> getUnitList() {
         return unitList;

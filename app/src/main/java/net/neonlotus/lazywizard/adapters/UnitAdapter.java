@@ -1,39 +1,29 @@
 package net.neonlotus.lazywizard.adapters;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.andexert.expandablelayout.library.ExpandableLayoutItem;
-
-import net.neonlotus.lazywizard.Fragments.TestFragment;
-import net.neonlotus.lazywizard.MainActivity;
-import net.neonlotus.lazywizard.R;
+import net.neonlotus.lazywizard.Fragments.frag_Unit;
 import net.neonlotus.lazywizard.activeandroid.Unit;
-import net.neonlotus.lazywizard.appliation.App;
-import net.neonlotus.lazywizard.appliation.Prefs_;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class UnitAdapter extends ArrayAdapter<Unit> {
 
-    List<Unit> unitList;
+    public UnitAdapter(Context context, int resource, List<Unit> items, frag_Unit fragment) {
+        super(context, resource, items);
+        //this.unitList = items;
+        //this.fragment = fragment;
+    }
+
+   /* List<Unit> unitList;
     //Fragment_Unit fragment;
-    TestFragment fragment;
+    frag_Unit fragment;
     ExpandableLayoutItem eli;
     List<ExpandableLayoutItem> myList = new ArrayList<ExpandableLayoutItem>();
 
     //public UnitAdapter(Context context, int resource, List<Unit> items, Fragment_Unit fragment) {
-    public UnitAdapter(Context context, int resource, List<Unit> items, TestFragment fragment) {
+    public UnitAdapter(Context context, int resource, List<Unit> items, frag_Unit fragment) {
         super(context, resource, items);
         this.unitList = items;
         this.fragment = fragment;
@@ -74,10 +64,10 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        eli.setOnClickListener(new View.OnClickListener() {
+        *//*eli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ryan","eli position " + position+" name "+App.getInstance().getUnitList().get(position).name);
+                Log.d("ryan","eli position " + position+" name "+ MyApplication.getInstance().getUnitList().get(position).name);
                 for (int i = 0; i < myList.size(); i++) {
                     if (i == position) {
                         myList.get(i).show();
@@ -86,10 +76,10 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
                     }
                 }
             }
-        });
+        });*//*
 
         final Unit dUnit = unitList.get(position);
-        //final Unit dz = App.getInstance().getUnitList().get(position);
+        //final Unit dz = MyApplication.getInstance().getUnitList().get(position);
         //Log.d("ryan","dunit owned: "+dUnit.owned+" cost "+dUnit.cost);
         //Log.d("ryan","app owned: "+dz.owned+" cost "+dz.cost);
         //Log.d("ryan","--");
@@ -106,7 +96,7 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
         viewHolder.buyFifty.setText("Buy 50 for " + NumberFormat.getNumberInstance(Locale.US).format(y));
         viewHolder.buyHundred.setText("Buy 100 for " + NumberFormat.getNumberInstance(Locale.US).format(z));
 
-        final List<Unit> temp = App.getInstance().getUnitList();
+        final List<Unit> temp = MyApplication.getInstance().getUnitList();
 
         viewHolder.viewBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +106,7 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
                         temp.get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
                         temp.get(position).cost = (1 + (oNew * 2));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
@@ -124,69 +114,69 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
                 } else if (dUnit.name.equals("Jelly")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (5 + (oNew * 5));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (5 + (oNew * 5));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dUnit.name.equals("Skelebro")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (10 + (oNew * 10));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (10 + (oNew * 10));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dUnit.name.equals("Cup Bearer")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (25 + (oNew * 41));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (25 + (oNew * 41));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dUnit.name.equals("Whelp")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (80 + (oNew * 95));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (80 + (oNew * 95));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dUnit.name.equals("Monolith")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (150 + (oNew * 150));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (150 + (oNew * 150));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dUnit.name.equals("Farmer")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (225 + (oNew * 273));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (225 + (oNew * 273));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dUnit.name.equals("Mule")) {
                     if (MainActivity.checkSouls(dUnit.cost)) {
                         p.souls().put(p.souls().get() - dUnit.cost);
-                        App.getInstance().getUnitList().get(position).owned++;
-                        long oNew = App.getInstance().getUnitList().get(position).owned;
-                        App.getInstance().getUnitList().get(position).cost = (500 + (oNew * 814));
+                        MyApplication.getInstance().getUnitList().get(position).owned++;
+                        long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                        MyApplication.getInstance().getUnitList().get(position).cost = (500 + (oNew * 814));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                //App.getInstance().setUnitList(temp);
+                //MyApplication.getInstance().setUnitList(temp);
                 MainActivity.updateSouls();
                 notifyDataSetChanged();
             }
@@ -252,9 +242,9 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 
                 if (MainActivity.checkSouls(totalcost)) {
                     p.souls().put(p.souls().get() - totalcost);
-                    App.getInstance().getUnitList().get(position).owned += 10;
-                    long oNew = App.getInstance().getUnitList().get(position).owned;
-                    App.getInstance().getUnitList().get(position).cost = (baseCost + (oNew * multiCost));
+                    MyApplication.getInstance().getUnitList().get(position).owned += 10;
+                    long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                    MyApplication.getInstance().getUnitList().get(position).cost = (baseCost + (oNew * multiCost));
 
                     //Toast.makeText(getContext(),""+(1+(oNew*2)),Toast.LENGTH_SHORT).show();
 
@@ -330,9 +320,9 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 
                 if (MainActivity.checkSouls(totalcost)) {
                     p.souls().put(p.souls().get() - totalcost);
-                    App.getInstance().getUnitList().get(position).owned += 50;
-                    long oNew = App.getInstance().getUnitList().get(position).owned;
-                    App.getInstance().getUnitList().get(position).cost = (baseCost + (oNew * multiCost));
+                    MyApplication.getInstance().getUnitList().get(position).owned += 50;
+                    long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                    MyApplication.getInstance().getUnitList().get(position).cost = (baseCost + (oNew * multiCost));
                     MainActivity.updateSouls();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
@@ -405,9 +395,9 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 
                 if (MainActivity.checkSouls(totalcost)) {
                     p.souls().put(p.souls().get() - totalcost);
-                    App.getInstance().getUnitList().get(position).owned += 100;
-                    long oNew = App.getInstance().getUnitList().get(position).owned;
-                    App.getInstance().getUnitList().get(position).cost = (baseCost + (oNew * multiCost));
+                    MyApplication.getInstance().getUnitList().get(position).owned += 100;
+                    long oNew = MyApplication.getInstance().getUnitList().get(position).owned;
+                    MyApplication.getInstance().getUnitList().get(position).cost = (baseCost + (oNew * multiCost));
                     MainActivity.updateSouls();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
@@ -478,6 +468,6 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 
         return totalcost;
     }
-
+*/
 
 }

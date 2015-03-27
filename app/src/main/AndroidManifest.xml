@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.neonlotus.lazywizard">
 
-    <application
-        android:name="com.activeandroid.app.Application"
+    <application android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
         android:icon="@drawable/lwicon"
         android:label="@string/app_name"
@@ -21,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".Views.CharacterDialog"
+            android:name=".views.CharacterDialog"
             android:theme="@android:style/Theme.Dialog"></activity>
 
         <meta-data
@@ -32,7 +31,7 @@
             android:value="1" />
 
         <service
-            android:name=".appliation.MainService"
+            android:name="net.neonlotus.lazywizard.application.MainService"
             android:icon="@drawable/ic_launcher"
             android:label="Service"></service>
 
@@ -41,3 +40,5 @@
 
 
 </manifest>
+<!-- com.activeandroid.app.Application -->
+    <!-- net.neonlotus.lazywizard.application.MyApplication_ -->

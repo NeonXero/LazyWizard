@@ -1,31 +1,14 @@
 package net.neonlotus.lazywizard.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.util.Log;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.activeandroid.query.Select;
-import com.nispok.snackbar.Snackbar;
-import com.nispok.snackbar.SnackbarManager;
 
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.activeandroid.Category;
-import net.neonlotus.lazywizard.activeandroid.Unit;
-import net.neonlotus.lazywizard.adapters.UnitAdapter;
-import net.neonlotus.lazywizard.appliation.App;
-import net.neonlotus.lazywizard.appliation.Prefs_;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
-import java.util.List;
 //tools:context=".MainActivity$PlaceholderFragment"
 @EFragment (R.layout.fragment_unit)
-public class Fragment_Unit extends Fragment {
+public class old_Fragment_Unit extends Fragment {
+/*
 
     Context context = getActivity();
 
@@ -55,14 +38,14 @@ public class Fragment_Unit extends Fragment {
 
         if (prefs.setupCount().exists()) {
             if (prefs.setupCount().get()==10 ) {
-                unitList = App.getInstance().getUnitList(); //???
-                App.getInstance().setUnitList(unitList);
+                unitList = MyApplication.getInstance().getUnitList(); //???
+                MyApplication.getInstance().setUnitList(unitList);
             } else {
-                if (App.getInstance().getUnitList() != null) {
-                    if (App.getInstance().getUnitList().size()>0) {
+                if (MyApplication.getInstance().getUnitList() != null) {
+                    if (MyApplication.getInstance().getUnitList().size()>0) {
                         // setup count exists, getUnitList not null and size > 0
-                        unitList = App.getInstance().getUnitList(); //???
-                        App.getInstance().setUnitList(unitList);
+                        unitList = MyApplication.getInstance().getUnitList(); //???
+                        MyApplication.getInstance().setUnitList(unitList);
                     } else {
                         // setup count exists, getUnitList not null and size ! > 0
                         unitList = getAll();
@@ -70,7 +53,7 @@ public class Fragment_Unit extends Fragment {
                 } else {
                     // setup count exists, getUnitList is null
                     unitList = getAll();
-                    App.getInstance().setUnitList(unitList);
+                    MyApplication.getInstance().setUnitList(unitList);
                 }
             }
         } else {
@@ -82,7 +65,7 @@ public class Fragment_Unit extends Fragment {
             setupDB();
             unitList = getAll();
 
-            App.getInstance().setUnitList(unitList);
+            MyApplication.getInstance().setUnitList(unitList);
             prefs.setupCount().put(setupCount);
         }
 
@@ -166,7 +149,7 @@ public class Fragment_Unit extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        App.getInstance().saveAll();
+        MyApplication.getInstance().saveAll();
     }
 
     @Override
@@ -178,5 +161,6 @@ public class Fragment_Unit extends Fragment {
 
 
 
+*/
 
 }

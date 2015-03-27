@@ -1,13 +1,15 @@
-package net.neonlotus.lazywizard.appliation;
+package net.neonlotus.lazywizard.application;
 
+import org.androidannotations.annotations.sharedpreferences.DefaultLong;
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
 
 @SharedPref(value = SharedPref.Scope.UNIQUE)
 public interface Prefs {
 
-
+    @DefaultLong(15)
     long souls();
+
     long bonusSouls();
 
     int setupCount();
@@ -20,4 +22,6 @@ public interface Prefs {
     String battleStyle();
 
     int moonRocks();
+
+
 }

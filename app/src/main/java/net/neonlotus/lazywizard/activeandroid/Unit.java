@@ -13,6 +13,12 @@ public class Unit extends Model {
     @Column(name= "Cost")
     public long cost;
 
+    @Column(name="CostBase")
+    public long costbase;
+
+    @Column(name="CostMulti")
+    public long costmulti;
+
     @Column(name= "Owned")
     public long owned;
 
@@ -25,13 +31,15 @@ public class Unit extends Model {
     public Unit(){
         super();
     }
-    public Unit(String name, Category category, long cost, long owned, long rate){
+    public Unit(String name, Category category, long cost, long owned, long rate, long costmulti, long costbase){
         super();
         this.name = name;
         this.cost = cost;
         this.owned = owned;
         this.rate = rate;
         this.category = category;
+        this.costmulti = costmulti;
+        this.costbase = costbase;
     }
 
 }

@@ -11,13 +11,11 @@ import android.widget.Toast;
 
 import com.andexert.expandablelayout.library.ExpandableLayoutItem;
 
-import net.neonlotus.lazywizard.Fragments.Fragment_Lab;
+import net.neonlotus.lazywizard.Fragments.old_Fragment_Lab;
 import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
 import net.neonlotus.lazywizard.activeandroid.Tech;
-import net.neonlotus.lazywizard.activeandroid.Unit;
-import net.neonlotus.lazywizard.appliation.App;
-import net.neonlotus.lazywizard.appliation.Prefs_;
+import net.neonlotus.lazywizard.application.Prefs_;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ import java.util.Locale;
 public class LabAdapter extends ArrayAdapter<Tech> {
 
     List<Tech> techList;
-    Fragment_Lab fragment;
+    old_Fragment_Lab fragment;
     ExpandableLayoutItem eli;
     List<ExpandableLayoutItem> myList = new ArrayList<ExpandableLayoutItem>();
 
@@ -37,7 +35,7 @@ public class LabAdapter extends ArrayAdapter<Tech> {
     TextView name, count, rate;
     Button buy;
 
-    public LabAdapter(Context context, int resource, List<Tech> items, Fragment_Lab fragment) {
+    public LabAdapter(Context context, int resource, List<Tech> items, old_Fragment_Lab fragment) {
         super(context, resource, items);
         this.techList = items;
         this.fragment = fragment;
@@ -133,12 +131,12 @@ public class LabAdapter extends ArrayAdapter<Tech> {
         });
 
         final Tech dTech = techList.get(position);
-        final Unit dUnit = App.getInstance().getUnitList().get(position);
+        ////final Unit dUnit = MyApplication.getInstance().getUnitList().get(position);
         //viewHolder.viewName.setText(dTech.name+" "+dTech.owned);
         viewHolder.viewName.setText(dTech.name);
         viewHolder.viewCount.setText("Owned: "+ NumberFormat.getNumberInstance(Locale.US).format(dTech.owned));
 //        viewHolder.viewCount.setText(dUnit.name+"s now produce "+ NumberFormat.getNumberInstance(Locale.US).format((dUnit.owned)*(dUnit.rate)));
-        viewHolder.viewCount.setText(dUnit.name+"s now produce "+ NumberFormat.getNumberInstance(Locale.US).format((dUnit.rate)));
+        ////viewHolder.viewCount.setText(dUnit.name+"s now produce "+ NumberFormat.getNumberInstance(Locale.US).format((dUnit.rate)));
 
         //viewHolder.viewRate.setText("Provides: "+ NumberFormat.getNumberInstance(Locale.US).format((dTech.rate*dTech.owned)));
         viewHolder.viewRate.setText("");
@@ -159,7 +157,7 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                 if (dTech.name.contains("Min")) { //Minion Hats
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get()-dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
+                        ////MyApplication.getInstance().getTechList().get(position).owned++;
                         long a = dTech.owned%8;
                         long b = dTech.owned-a;
                         long c = b/8;
@@ -168,16 +166,16 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                         } else {
                             dTech.name = minionTiers.get(((int)dTech.owned%8));
                         }
-                        dUnit.rate = (dTech.rate+dTech.owned);
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (1+(oNew*2));
+                        ////dUnit.rate = (dTech.rate+dTech.owned);
+                        ////long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                       //// MyApplication.getInstance().getTechList().get(position).cost = (1+(oNew*2));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.contains("Jel")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get() - dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
+                       //// MyApplication.getInstance().getTechList().get(position).owned++;
                         long a = dTech.owned%8;
                         long b = dTech.owned-a;
                         long c = b/8;
@@ -186,69 +184,69 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                         } else {
                             dTech.name = jellyTiers.get(((int)dTech.owned%8));
                         }
-                        dUnit.rate = (dTech.rate+dTech.owned);;
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (10+(oNew*5));
+                      ////  dUnit.rate = (dTech.rate+dTech.owned);;
+                      ////  long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                      ////  MyApplication.getInstance().getTechList().get(position).cost = (10+(oNew*5));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.equals("Extra Bones")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get() - dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
-                        dUnit.rate = (dTech.rate+dTech.owned);
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (100+(oNew*9));
+                       //// MyApplication.getInstance().getTechList().get(position).owned++;
+                      ////  dUnit.rate = (dTech.rate+dTech.owned);
+                      ////  long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                      ////  MyApplication.getInstance().getTechList().get(position).cost = (100+(oNew*9));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.equals("Cup Polish")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get()-dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
-                        dUnit.rate = (dTech.rate+dTech.owned);;
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (1000+(oNew*17));
+                      ////  MyApplication.getInstance().getTechList().get(position).owned++;
+                      ////  dUnit.rate = (dTech.rate+dTech.owned);;
+                      ////  long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                      ////  MyApplication.getInstance().getTechList().get(position).cost = (1000+(oNew*17));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.equals("Turbo Wings")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get()-dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
-                        dUnit.rate = (dTech.rate+dTech.owned);
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (2000+(oNew*31));
+                      ////  MyApplication.getInstance().getTechList().get(position).owned++;
+                      ////  dUnit.rate = (dTech.rate+dTech.owned);
+                      ////  long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                     ////   MyApplication.getInstance().getTechList().get(position).cost = (2000+(oNew*31));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.equals("Crag Swag")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get()-dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
-                        dUnit.rate = (dTech.rate+dTech.owned);
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (3000+(oNew*86));
+                    ////    MyApplication.getInstance().getTechList().get(position).owned++;
+                      ////  dUnit.rate = (dTech.rate+dTech.owned);
+                     ////   long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                     ////   MyApplication.getInstance().getTechList().get(position).cost = (3000+(oNew*86));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.equals("Magic Beans")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get()-dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
-                        dUnit.rate = (dTech.rate+dTech.owned);
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (4000+(oNew*124));
+                     ////   MyApplication.getInstance().getTechList().get(position).owned++;
+                      ////  dUnit.rate = (dTech.rate+dTech.owned);
+                     ////   long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                    ////    MyApplication.getInstance().getTechList().get(position).cost = (4000+(oNew*124));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
                 } else if (dTech.name.equals("Mule Sauce")) {
                     if (MainActivity.checkSouls(dTech.cost)) {
                         p.souls().put(p.souls().get()-dTech.cost);
-                        App.getInstance().getTechList().get(position).owned++;
-                        dUnit.rate = (dTech.rate+dTech.owned);
-                        long oNew = App.getInstance().getTechList().get(position).owned;
-                        App.getInstance().getTechList().get(position).cost = (10000+(oNew*599));
+                  ////      MyApplication.getInstance().getTechList().get(position).owned++;
+                  ////      dUnit.rate = (dTech.rate+dTech.owned);
+                   ////     long oNew = MyApplication.getInstance().getTechList().get(position).owned;
+                   ////     MyApplication.getInstance().getTechList().get(position).cost = (10000+(oNew*599));
                     } else {
                         Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                     }
@@ -318,8 +316,8 @@ public class LabAdapter extends ArrayAdapter<Tech> {
 
                 if (MainActivity.checkSouls(totalcost)) {
                     p.souls().put(p.souls().get() - totalcost);
-                    App.getInstance().getTechList().get(position).owned += 10;
-                    long oNew = App.getInstance().getTechList().get(position).owned;
+                  ////  MyApplication.getInstance().getTechList().get(position).owned += 10;
+                 ////   long oNew = MyApplication.getInstance().getTechList().get(position).owned;
 
                     long a = dTech.owned%8;
                     long b = dTech.owned-a;
@@ -329,9 +327,9 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                     } else {
                         //dTech.name = minionTiers.get(((int)dTech.owned%8));
                     }
-                    dUnit.rate = (dTech.rate+oNew);
+                 ////   dUnit.rate = (dTech.rate+oNew);
 
-                    App.getInstance().getTechList().get(position).cost = (baseCost + (oNew * multiCost));
+                ////    MyApplication.getInstance().getTechList().get(position).cost = (baseCost + (oNew * multiCost));
                     MainActivity.updateSouls();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
@@ -404,8 +402,8 @@ public class LabAdapter extends ArrayAdapter<Tech> {
 
                 if (MainActivity.checkSouls(totalcost)) {
                     p.souls().put(p.souls().get() - totalcost);
-                    App.getInstance().getTechList().get(position).owned += 50;
-                    long oNew = App.getInstance().getTechList().get(position).owned;
+                 ////   MyApplication.getInstance().getTechList().get(position).owned += 50;
+                 ////   long oNew = MyApplication.getInstance().getTechList().get(position).owned;
 
                     long a = dTech.owned%8;
                     long b = dTech.owned-a;
@@ -416,9 +414,9 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                         dTech.name = minionTiers.get(((int)dTech.owned%8));
                     }
 
-                    App.getInstance().getTechList().get(position).cost = (baseCost + (oNew * multiCost));
-                    //App.getInstance().getUnitList().get(position).rate+= (dTech.rate*50);
-                    dUnit.rate = (dTech.rate+oNew);
+               ////     MyApplication.getInstance().getTechList().get(position).cost = (baseCost + (oNew * multiCost));
+                    //MyApplication.getInstance().getUnitList().get(position).rate+= (dTech.rate*50);
+               ////     dUnit.rate = (dTech.rate+oNew);
                     MainActivity.updateSouls();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
@@ -492,7 +490,7 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                 if (MainActivity.checkSouls(totalcost)) {
                     p.souls().put(p.souls().get() - totalcost);
                     dTech.owned += 100;
-                    long oNew = App.getInstance().getTechList().get(position).owned;
+                ////    long oNew = MyApplication.getInstance().getTechList().get(position).owned;
 
                     long a = dTech.owned%8;
                     long b = dTech.owned-a;
@@ -503,9 +501,9 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                         dTech.name = minionTiers.get(((int)dTech.owned%8));
                     }
 
-                    dTech.cost = (baseCost + (oNew * multiCost));
-                    //App.getInstance().getUnitList().get(position).rate+= (dTech.rate*100);
-                    dUnit.rate = (dTech.rate+oNew);
+              ////      dTech.cost = (baseCost + (oNew * multiCost));
+                    //MyApplication.getInstance().getUnitList().get(position).rate+= (dTech.rate*100);
+              ////      dUnit.rate = (dTech.rate+oNew);
                     MainActivity.updateSouls();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();

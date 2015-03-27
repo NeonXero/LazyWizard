@@ -1,35 +1,15 @@
 package net.neonlotus.lazywizard.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.activeandroid.query.Select;
-
-import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.activeandroid.Item;
-import net.neonlotus.lazywizard.activeandroid.Unit;
-import net.neonlotus.lazywizard.appliation.App;
-import net.neonlotus.lazywizard.appliation.Prefs_;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
-import java.text.NumberFormat;
-import java.util.List;
-import java.util.Locale;
 
 @EFragment (R.layout.fragment_arcane)
-public class Fragment_Arcane extends Fragment {
+public class old_Fragment_Arcane extends Fragment {
 
-    Context context = getActivity();
+    /*Context context = getActivity();
     int rocks;
     List<Item> itemList;
     List<Item> headItems, armorItems, weaponItems, accessoryItems;
@@ -82,10 +62,10 @@ public class Fragment_Arcane extends Fragment {
     @Click(R.id.btnMotivation)
     void motivate() {
         if (MainActivity.checkSouls(1000000000)) {
-            List<Unit> unitList = App.getInstance().getUnitList();
+            List<Unit> unitList = MyApplication.getInstance().getUnitList();
             long currentRate = unitList.get(0).rate;
             unitList.get(0).rate = currentRate * 2;
-            App.getInstance().setUnitList(unitList);
+            MyApplication.getInstance().setUnitList(unitList);
             prefs.souls().put(prefs.souls().get() - 1000000000);
             MainActivity.updateSouls();
         } else {
@@ -110,5 +90,5 @@ public class Fragment_Arcane extends Fragment {
         rocks = prefs.moonRocks().get();
         tvMoonRocks.setText(NumberFormat.getNumberInstance(Locale.US).format(rocks));
     }
-
+*/
 }

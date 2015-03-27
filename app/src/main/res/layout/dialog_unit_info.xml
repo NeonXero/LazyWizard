@@ -23,8 +23,15 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_marginTop="15dp"
-        android:text="What else:"
+        android:text="moar?"
         android:id="@+id/tvX"
         />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText3"
+        android:text="Picture? stuff?"
+        android:layout_marginTop="40dp" />
 
 </LinearLayout>

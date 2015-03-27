@@ -1,4 +1,4 @@
-package net.neonlotus.lazywizard.Views;
+package net.neonlotus.lazywizard.views;
 
 import android.content.Context;
 import android.util.AttributeSet;

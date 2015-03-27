@@ -1,42 +1,50 @@
 package net.neonlotus.lazywizard.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.IconButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.alertdialogpro.AlertDialogPro;
-import com.andexert.expandablelayout.library.ExpandableLayoutItem;
+import com.afollestad.materialdialogs.Theme;
 
-import net.neonlotus.lazywizard.Fragments.TestFragment;
+import net.neonlotus.lazywizard.Fragments.frag_Unit;
+import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
 import net.neonlotus.lazywizard.activeandroid.Unit;
-import net.neonlotus.lazywizard.appliation.App;
+import net.neonlotus.lazywizard.application.MyApplication;
+import net.neonlotus.lazywizard.application.Prefs_;
 
-import java.util.ArrayList;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
+
 
 public class newUnitAdapter extends ArrayAdapter<Unit> {
 
-    List<Unit> unitList;
-    //Fragment_Unit fragment;
-    TestFragment fragment;
-    ExpandableLayoutItem eli;
-    List<ExpandableLayoutItem> myList = new ArrayList<ExpandableLayoutItem>();
 
-    //public UnitAdapter(Context context, int resource, List<Unit> items, Fragment_Unit fragment) {
-    public newUnitAdapter(Context context, int resource, List<Unit> items, TestFragment fragment) {
+
+MyApplication app;
+
+    List<Unit> unitList;
+
+    frag_Unit fragment;
+
+
+    public newUnitAdapter(Context context, int resource, List<Unit> items, frag_Unit fragment) {
         super(context, resource, items);
         this.unitList = items;
         this.fragment = fragment;
+
+        app = MyApplication.getInstance();
+
+
     }
 
     static class ViewHolder {
@@ -45,6 +53,7 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
         protected IconButton upgrade;
         protected IconButton stats;
     }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -68,19 +77,12 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
 
 
         final Unit dUnit = unitList.get(position);
-
-
         viewHolder.viewName.setText(dUnit.name);
-
-
-        final List<Unit> temp = App.getInstance().getUnitList();
 
         viewHolder.buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(),"POS: "+position+" buy",Toast.LENGTH_SHORT).show();
-                //showBuyDialog(position);
-                buyDialog(position);
+                showPurchaseDialog(position);
             }
         });
 
@@ -88,7 +90,7 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getContext(), "POS: " + position + " up", Toast.LENGTH_SHORT).show();
-                showUpgradeDialog(position);
+                //showUpgradeDialog(position);
                 //showListAlertDialog();
             }
         });
@@ -96,7 +98,6 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
         viewHolder.stats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(),"POS: "+position+" stats",Toast.LENGTH_SHORT).show();
                 showInfoDialog(position);
             }
         });
@@ -106,102 +107,201 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
 
     }
 
-    private void showBuyDialog(int position) {
-        createAlertDialogBuilder()
-                .setTitle(unitList.get(position).name)
-                .setMessage("BUY UEUEHUHEF")
-                .setNegativeButton("Cancel", new ButtonClickedListener("Cancel"))
-                .setPositiveButton("Ok", new ButtonClickedListener("Ok")).show();
-
-    }
-
-    private void showUpgradeDialog(int position) {
 
 
-        createAlertDialogBuilder()
-                .setTitle(unitList.get(position).name)
-                .setMessage("UPGRADE HUEUEHUE")
-                .setPositiveButton("Ok", new ButtonClickedListener("Ok")).show();
 
-    }
+    private View positiveAction;
 
-    private void showInfoDialog(int position) {
-        String o = "Owned: "+unitList.get(position).owned+"\n\n";
-        String r = "Rate: "+unitList.get(position).rate+"\n\n";
-        String xxx = "Other?";
-        String message = o+r+xxx;
+    private void showPurchaseDialog(final int position) {
+        final Prefs_ p = MainActivity.getPrefs();
+        final Unit thisUnit = unitList.get(position);
 
-        createAlertDialogBuilder()
-                .setTitle(unitList.get(position).name)
-                .setMessage(message)
-                .setNegativeButton("Cancel", new ButtonClickedListener("Cancel"))
-                .setPositiveButton("Ok", new ButtonClickedListener("Ok")).show();
-    }
-
-    private void showListAlertDialog() {
-        final String[] list = new String[]{"Argentina", "Canada", "China (中国)", "Japan (日本)",
-                "United States"};
-        createAlertDialogBuilder()
-                .setTitle("Choose your country")
-                .setItems(list, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getContext(), "" + list[which], Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .show();
-    }
-
-    private AlertDialog.Builder createAlertDialogBuilder() {
-        int mTheme = R.style.Theme_AlertDialogPro_Material;
-        return new AlertDialogPro.Builder(getContext(), mTheme);
-    }
-
-    private class ButtonClickedListener implements DialogInterface.OnClickListener {
-        private CharSequence mShowWhenClicked;
-
-        public ButtonClickedListener(CharSequence showWhenClicked) {
-            mShowWhenClicked = showWhenClicked;
-        }
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            if (which==-1) {
-                Toast.makeText(getContext(), "neg one" + which, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "not neg one" + which, Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    }
-
-    public void buyDialog(int position) {
-        new MaterialDialog.Builder(getContext())
-                .title(unitList.get(position).name)
-                .content("content")
-                .positiveText("positive")
-                .negativeText("negative")
+        MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                .title(thisUnit.name)
+                .customView(R.layout.dialog_unit_buy, true)
+                .positiveText("Close")
+                .theme(Theme.DARK)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        Log.d("zz", "posssss");
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                        Log.d("zz", "neggg");
-                    }
-
-                    @Override
-                    public void onNeutral(MaterialDialog dialog) {
-                        Log.d("zz", "nuenuenuenuen");
+                        goAway(dialog);
                     }
                 })
-                .autoDismiss(false)
-                .show();
+                .build();
+
+        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+        final TextView one = (TextView) dialog.getCustomView().findViewById(R.id.tvOneCost);
+        final TextView ten = (TextView) dialog.getCustomView().findViewById(R.id.tvTenCost);
+        final TextView fifty = (TextView) dialog.getCustomView().findViewById(R.id.tvFiftyCost);
+        final TextView hundred = (TextView) dialog.getCustomView().findViewById(R.id.tvHundredCost);
+
+        one.setText(""+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
+        final long tenBuy = doMass(thisUnit, 10);
+        ten.setText(""+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
+        final long fiftyBuy = doMass(thisUnit, 50);
+        fifty.setText(""+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
+        final long hundredBuy = doMass(thisUnit, 100);
+        hundred.setText(""+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
+
+        final Button bone = (Button) dialog.getCustomView().findViewById(R.id.btnOne);
+        final Button bten = (Button) dialog.getCustomView().findViewById(R.id.btnTen);
+        final Button bfifty = (Button) dialog.getCustomView().findViewById(R.id.btnFifty);
+        final Button bhundred = (Button) dialog.getCustomView().findViewById(R.id.btnHundred);
+        //eyy
+        bone.setText("BUY 1\n"+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
+        bten.setText("BUY 10\n"+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
+        bfifty.setText("BUY 50\n"+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
+        bhundred.setText("BUY 100\n"+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
+
+        bone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.checkSouls(thisUnit.cost)) {
+                    p.souls().put(p.souls().get() - thisUnit.cost);
+                    thisUnit.owned++;
+                    long oNew = thisUnit.owned;
+                    thisUnit.cost = (thisUnit.costbase + (oNew * thisUnit.costmulti));
+                } else {
+                    Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
+                }
+                //updateTextViews(thisUnit, one, ten, fifty, hundred);
+                app.getUnitList().set(position,thisUnit);
+                MainActivity.updateSouls();
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+            }
+        });
+        bten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.checkSouls(tenBuy)) {
+                    p.souls().put(p.souls().get() - tenBuy);
+                    thisUnit.owned+=10;
+                    long oNew = thisUnit.owned;
+                    thisUnit.cost = (thisUnit.costbase + (oNew * thisUnit.costmulti));
+                } else {
+                    Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
+                }
+                //updateTextViews(thisUnit, one, ten, fifty, hundred);
+                app.getUnitList().set(position,thisUnit);
+                MainActivity.updateSouls();
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+            }
+        });
+        bfifty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.checkSouls(fiftyBuy)) {
+                    p.souls().put(p.souls().get() - fiftyBuy);
+                    thisUnit.owned+=50;
+                    long oNew = thisUnit.owned;
+                    thisUnit.cost = (thisUnit.costbase + (oNew * thisUnit.costmulti));
+                } else {
+                    Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
+                }
+                //updateTextViews(thisUnit, one, ten, fifty, hundred);
+                app.getUnitList().set(position,thisUnit);
+                MainActivity.updateSouls();
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+            }
+        });
+        bhundred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.checkSouls(hundredBuy)) {
+                    p.souls().put(p.souls().get() - hundredBuy);
+                    thisUnit.owned+=100;
+                    long oNew = thisUnit.owned;
+                    thisUnit.cost = (thisUnit.costbase + (oNew * thisUnit.costmulti));
+                } else {
+                    Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
+                }
+                //updateTextViews(thisUnit, one, ten, fifty, hundred);
+                app.getUnitList().set(position,thisUnit);
+                MainActivity.updateSouls();
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+            }
+        });
+
+        dialog.show();
+        positiveAction.setEnabled(true); // disabled by default
+    }
+
+    /*
+    UPGRADE DIALOG
+    UPGRADE DIALOG
+    UPGRADE DIALOG
+    UPGRADE DIALOG
+    UPGRADE DIALOG
+     */
+
+    private void showInfoDialog(final int position) {
+        final Unit thisUnit = unitList.get(position);
+
+        MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                .title(thisUnit.name)
+                .customView(R.layout.dialog_unit_info, true)
+                .positiveText("Close")
+                .theme(Theme.DARK)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        app.setUnitList(unitList);
+                        goAway(dialog);
+                    }
+                })
+                .build();
+
+        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+        final TextView owned = (TextView) dialog.getCustomView().findViewById(R.id.tvOwned);
+        final TextView generating = (TextView) dialog.getCustomView().findViewById(R.id.tvGenerating);
+
+        owned.setText("Owned: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.owned));
+        long gen = thisUnit.owned*thisUnit.rate;
+        generating.setText("Generating: "+NumberFormat.getNumberInstance(Locale.US).format(gen));
 
 
+        dialog.show();
+        positiveAction.setEnabled(true); // disabled by default
+    }
 
+    public void goAway(MaterialDialog md) {
+        md.dismiss();
+    }
+
+
+    public long doMass(Unit u, int amount) {
+        long owned = u.owned;
+        long totalcost = (u.costbase + owned * u.costmulti);
+        long cost;
+        int i = 0;
+        while (i < amount) {
+            owned++;
+            cost = (u.costbase + (owned * u.costmulti));
+            totalcost += cost;
+            ++i;
+        }
+
+        return totalcost;
+    }
+
+    public void updateTextViews(Unit thisUnit, TextView one, TextView ten, TextView fifty, TextView hundred) {
+        one.setText(""+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
+        long tenBuy = doMass(thisUnit, 10);
+        ten.setText(""+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
+        long fiftyBuy = doMass(thisUnit, 50);
+        fifty.setText(""+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
+        long hundredBuy = doMass(thisUnit, 100);
+        hundred.setText(""+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
+    }
+    public void updateButtonViews(Unit thisUnit, Button one, Button ten, Button fifty, Button hundred) {
+        final long tenBuy = doMass(thisUnit, 10);
+        final long fiftyBuy = doMass(thisUnit, 50);
+        final long hundredBuy = doMass(thisUnit, 100);
+
+        one.setText("BUY 1\n"+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
+        ten.setText("BUY 10\n"+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
+        fifty.setText("BUY 50\n"+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
+        hundred.setText("BUY 100\n"+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
     }
 
 
