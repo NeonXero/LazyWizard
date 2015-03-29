@@ -21,8 +21,8 @@ public class UnitAdapterRow extends LinearLayout {
     IconButton btnBuy;
     @ViewById
     IconButton btnUp;
-    @ViewById
-    IconButton btnStats;
+    /*@ViewById
+    IconButton btnStats;*/
 
     public UnitAdapterRow(Context context) {
         super(context);

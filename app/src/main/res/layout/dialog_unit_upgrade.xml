@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upgrade 1"
+            android:id="@+id/cbOne"
+            android:checked="false"
+            android:clickable="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UU"
+            android:id="@+id/upOne"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SS"
+            android:id="@+id/snackOne" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upgrade 2"
+            android:id="@+id/cbTwo"
+            android:checked="false"
+            android:clickable="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UU"
+            android:id="@+id/upTwo"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SS"
+            android:id="@+id/snackTwo" />
+    </LinearLayout>
+
+</LinearLayout>

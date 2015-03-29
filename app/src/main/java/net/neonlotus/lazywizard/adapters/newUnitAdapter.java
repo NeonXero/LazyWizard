@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.IconButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.enums.SnackbarType;
 
 import net.neonlotus.lazywizard.Fragments.frag_Unit;
 import net.neonlotus.lazywizard.MainActivity;
@@ -51,7 +55,7 @@ MyApplication app;
         protected TextView viewName;
         protected IconButton buy;
         protected IconButton upgrade;
-        protected IconButton stats;
+        //protected IconButton stats;
     }
 
 
@@ -68,7 +72,7 @@ MyApplication app;
             viewHolder.viewName = (TextView) convertView.findViewById(R.id.tvName);
             viewHolder.buy = (IconButton) convertView.findViewById(R.id.btnBuy);
             viewHolder.upgrade = (IconButton) convertView.findViewById(R.id.btnUp);
-            viewHolder.stats = (IconButton) convertView.findViewById(R.id.btnStats);
+            //viewHolder.stats = (IconButton) convertView.findViewById(R.id.btnStats);
 
             convertView.setTag(viewHolder);
         } else {
@@ -89,18 +93,16 @@ MyApplication app;
         viewHolder.upgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(), "POS: " + position + " up", Toast.LENGTH_SHORT).show();
-                //showUpgradeDialog(position);
-                //showListAlertDialog();
+                showUpgradeDialog(position);
             }
         });
 
-        viewHolder.stats.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.stats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoDialog(position);
             }
-        });
+        });*/
 
 
         return convertView;
@@ -130,24 +132,21 @@ MyApplication app;
                 .build();
 
         positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
-        final TextView one = (TextView) dialog.getCustomView().findViewById(R.id.tvOneCost);
-        final TextView ten = (TextView) dialog.getCustomView().findViewById(R.id.tvTenCost);
-        final TextView fifty = (TextView) dialog.getCustomView().findViewById(R.id.tvFiftyCost);
-        final TextView hundred = (TextView) dialog.getCustomView().findViewById(R.id.tvHundredCost);
 
-        one.setText(""+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
+        final TextView data = (TextView) dialog.getCustomView().findViewById(R.id.tvData);
+        data.setText("Owned: "+thisUnit.owned+"\nProducing: "+thisUnit.rate*thisUnit.owned);
+
+
         final long tenBuy = doMass(thisUnit, 10);
-        ten.setText(""+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
         final long fiftyBuy = doMass(thisUnit, 50);
-        fifty.setText(""+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
         final long hundredBuy = doMass(thisUnit, 100);
-        hundred.setText(""+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
+
 
         final Button bone = (Button) dialog.getCustomView().findViewById(R.id.btnOne);
         final Button bten = (Button) dialog.getCustomView().findViewById(R.id.btnTen);
         final Button bfifty = (Button) dialog.getCustomView().findViewById(R.id.btnFifty);
         final Button bhundred = (Button) dialog.getCustomView().findViewById(R.id.btnHundred);
-        //eyy
+
         bone.setText("BUY 1\n"+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
         bten.setText("BUY 10\n"+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
         bfifty.setText("BUY 50\n"+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
@@ -167,7 +166,7 @@ MyApplication app;
                 //updateTextViews(thisUnit, one, ten, fifty, hundred);
                 app.getUnitList().set(position,thisUnit);
                 MainActivity.updateSouls();
-                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred, data);
             }
         });
         bten.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +183,7 @@ MyApplication app;
                 //updateTextViews(thisUnit, one, ten, fifty, hundred);
                 app.getUnitList().set(position,thisUnit);
                 MainActivity.updateSouls();
-                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred, data);
             }
         });
         bfifty.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +200,7 @@ MyApplication app;
                 //updateTextViews(thisUnit, one, ten, fifty, hundred);
                 app.getUnitList().set(position,thisUnit);
                 MainActivity.updateSouls();
-                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred, data);
             }
         });
         bhundred.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +217,7 @@ MyApplication app;
                 //updateTextViews(thisUnit, one, ten, fifty, hundred);
                 app.getUnitList().set(position,thisUnit);
                 MainActivity.updateSouls();
-                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred);
+                updateButtonViews(thisUnit, bone, bten, bfifty, bhundred,data);
             }
         });
 
@@ -233,6 +232,72 @@ MyApplication app;
     UPGRADE DIALOG
     UPGRADE DIALOG
      */
+    private void showUpgradeDialog(final int position) {
+        final Prefs_ p = MainActivity.getPrefs();
+        final Unit thisUnit = unitList.get(position);
+
+        MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                .title(thisUnit.name)
+                .customView(R.layout.dialog_unit_upgrade, true)
+                .positiveText("Close")
+                .theme(Theme.DARK)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        goAway(dialog);
+                    }
+                })
+                .build();
+
+        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+
+        final CheckBox c1 = (CheckBox) dialog.getCustomView().findViewById(R.id.cbOne);
+        final CheckBox c2 = (CheckBox) dialog.getCustomView().findViewById(R.id.cbTwo);
+
+        final Button b1 = (Button) dialog.getCustomView().findViewById(R.id.upOne);
+        final Button b2 = (Button) dialog.getCustomView().findViewById(R.id.upTwo);
+        final Button s1 = (Button) dialog.getCustomView().findViewById(R.id.snackOne);
+        final Button s2 = (Button) dialog.getCustomView().findViewById(R.id.snackTwo);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c1.setChecked(true);
+                b1.setEnabled(false);
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c2.setChecked(true);
+                b2.setEnabled(false);
+            }
+        });
+        s1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*Snackbar.with(getContext()) // context
+                        .text("Single-line snackbar") // text to display
+                        .show(((MainActivity)getContext())); // activity where it is displayed*/
+                Toast.makeText(getContext(),"Boring toast that shows you some information",Toast.LENGTH_LONG).show();
+            }
+        });
+        s2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SnackbarManager.show(
+                        Snackbar.with((MainActivity)getContext())
+                                .type(SnackbarType.MULTI_LINE)
+                                .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
+                                .text("Snazzy Snackbar popup that shows you some information"));
+            }
+        });
+
+
+        dialog.show();
+        positiveAction.setEnabled(true); // disabled by default
+    }
 
     private void showInfoDialog(final int position) {
         final Unit thisUnit = unitList.get(position);
@@ -271,18 +336,20 @@ MyApplication app;
 
     public long doMass(Unit u, int amount) {
         long owned = u.owned;
-        long totalcost = (u.costbase + owned * u.costmulti);
+        long totalcost = (u.costbase + (owned * u.costmulti));
         long cost;
         int i = 0;
-        while (i < amount) {
+        while (i < amount-1) {
             owned++;
             cost = (u.costbase + (owned * u.costmulti));
             totalcost += cost;
-            ++i;
+           i++;
         }
 
         return totalcost;
     }
+
+
 
     public void updateTextViews(Unit thisUnit, TextView one, TextView ten, TextView fifty, TextView hundred) {
         one.setText(""+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.cost));
@@ -293,7 +360,7 @@ MyApplication app;
         long hundredBuy = doMass(thisUnit, 100);
         hundred.setText(""+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
     }
-    public void updateButtonViews(Unit thisUnit, Button one, Button ten, Button fifty, Button hundred) {
+    public void updateButtonViews(Unit thisUnit, Button one, Button ten, Button fifty, Button hundred, TextView data) {
         final long tenBuy = doMass(thisUnit, 10);
         final long fiftyBuy = doMass(thisUnit, 50);
         final long hundredBuy = doMass(thisUnit, 100);
@@ -302,6 +369,8 @@ MyApplication app;
         ten.setText("BUY 10\n"+NumberFormat.getNumberInstance(Locale.US).format(tenBuy));
         fifty.setText("BUY 50\n"+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
         hundred.setText("BUY 100\n"+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
+
+        data.setText("Owned: "+thisUnit.owned+"\nProducing: "+thisUnit.rate*thisUnit.owned);
     }
 
 

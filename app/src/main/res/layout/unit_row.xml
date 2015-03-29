@@ -41,12 +41,12 @@
             android:id="@+id/btnUp"
              />
 
-        <IconButton
+        <!--<IconButton
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="{fa-info}"
             android:id="@+id/btnStats"
-             />
+             />-->
     </LinearLayout>
 
 </RelativeLayout>
