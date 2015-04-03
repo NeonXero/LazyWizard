@@ -1,6 +1,7 @@
 package net.neonlotus.lazywizard.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -335,18 +336,48 @@ MyApplication app;
 
 
     public long doMass(Unit u, int amount) {
+
         long owned = u.owned;
-        long totalcost = (u.costbase + (owned * u.costmulti));
-        long cost;
-        int i = 0;
-        while (i < amount-1) {
-            owned++;
-            cost = (u.costbase + (owned * u.costmulti));
-            totalcost += cost;
-           i++;
+        long postOwned = owned+amount;
+        long totalcost = 0;
+        //Log.d("zz", "Cost so far " + totalcost);
+        //totalcost+= ((u.cost*amount)+(u.costmulti*amount));
+        //Log.d("zz", "Cost so far " + totalcost);
+        for (long i=owned+1;i<=u.owned+amount;i++) {
+            //Log.d("zz","10:: "+""+((u.costmulti*amount)-(u.costbase)));
+            //totalcost+= u.cost*i+(u.costmulti);
+            //Log.d("zz", "Cost so far " + totalcost);
+            //Log.d("zz","loop i- "+i+" cost "+((u.cost+((u.costmulti*i)-(u.costbase)))));
+            Log.d("zz","loop i- "+i+" cost "+((u.costmulti*i)-u.costbase));
+            totalcost+= ((u.costmulti*i)-u.costbase);
+            Log.d("zz", "Cost so far " + totalcost);
         }
 
-        return totalcost;
+
+
+
+        /*for (long i=owned;i<postOwned;i++) {
+            //totalcost+= ((i*u.costmulti)-0);
+            totalcost+= (u.cost+((i*u.costmulti))-u.costbase);
+            Log.d("zz", "Cost so far " + totalcost);
+        }*/
+        /*for (int i=0;i<amount;i++) {
+            totalcost+= ((u.costmulti*i)-u.costbase);
+            Log.d("zz", "Cost so far " + totalcost);
+        }*/
+
+//        long totalcost = (u.costbase + (owned * u.costmulti));
+//        long cost;
+//        int i = 0;
+//        while (i < amount-1) {
+//            owned++;
+//            cost = (u.costbase + (owned * u.costmulti));
+//            totalcost += cost;
+//           i++;
+//        }
+//        long totalcost = ( u.cost +   (  (u.costmulti*amount)-u.costbase));
+
+        return totalcost;//-u.costbase;
     }
 
 
