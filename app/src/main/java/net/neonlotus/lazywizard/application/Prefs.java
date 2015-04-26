@@ -7,7 +7,7 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
 @SharedPref(value = SharedPref.Scope.UNIQUE)
 public interface Prefs {
 
-    @DefaultLong(15)
+    @DefaultLong(123000)
     long souls();
 
     long bonusSouls();

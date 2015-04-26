@@ -28,10 +28,15 @@ public class Unit extends Model {
     @Column(name = "Category")
     public Category category;
 
+    @Column(name="UpgradeLevel")
+    public int upgradelevel;
+    @Column(name="UpgradeMulti")
+    public long upgrademulti;
+
     public Unit(){
         super();
     }
-    public Unit(String name, Category category, long cost, long owned, long rate, long costmulti, long costbase){
+    public Unit(String name, Category category, long cost, long owned, long rate, long costmulti, long costbase, int upgradelevel, long upgrademulti){
         super();
         this.name = name;
         this.cost = cost;
@@ -40,6 +45,8 @@ public class Unit extends Model {
         this.category = category;
         this.costmulti = costmulti;
         this.costbase = costbase;
+        this.upgradelevel = upgradelevel;
+        this.upgrademulti = upgrademulti;
     }
 
 }

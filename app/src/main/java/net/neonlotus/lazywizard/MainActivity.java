@@ -190,6 +190,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=1;
         unit.costmulti=2;
         unit.rate=1;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 100;
         unit.save();
 
         unit = new Unit();
@@ -199,6 +201,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=5;
         unit.costmulti=5;
         unit.rate=2;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 200;
         unit.save();
 
         unit = new Unit();
@@ -208,6 +212,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=10;
         unit.costmulti=10;
         unit.rate=3;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 300;
         unit.save();
 
         unit = new Unit();
@@ -217,6 +223,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=25;
         unit.costmulti=41;
         unit.rate=4;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 400;
         unit.save();
 
         unit = new Unit();
@@ -226,6 +234,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=80;
         unit.costmulti=95;
         unit.rate=5;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 500;
         unit.save();
 
         unit = new Unit();
@@ -235,6 +245,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=150;
         unit.costmulti=150;
         unit.rate=6;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 600;
         unit.save();
 
         unit = new Unit();
@@ -244,6 +256,8 @@ public class MainActivity extends FragmentActivity {
         unit.costbase=225;
         unit.costmulti=273;
         unit.rate=7;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 700;
         unit.save();
 
         unit = new Unit();
@@ -253,6 +267,8 @@ public class MainActivity extends FragmentActivity {
         unit.cost=500;
         unit.costbase=500;
         unit.costmulti=814;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 800;
         unit.save();
     }
 
