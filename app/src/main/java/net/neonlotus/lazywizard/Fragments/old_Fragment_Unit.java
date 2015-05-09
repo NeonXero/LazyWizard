@@ -18,7 +18,7 @@ public class old_Fragment_Unit extends Fragment {
     //Currency
     static int souls;
 
-    List<UnitAA> unitAAList;
+    List<Unit> unitList;
     UnitAdapter unitAdapter;
 
     @ViewById
@@ -32,28 +32,28 @@ public class old_Fragment_Unit extends Fragment {
 
         SnackbarManager.show(
                 Snackbar.with(getActivity())
-                        .text("UnitAA Snackbar Test"));
+                        .text("Unit Snackbar Test"));
 
         int setupCount=0;
 
         if (prefs.setupCount().exists()) {
             if (prefs.setupCount().get()==10 ) {
-                unitAAList = MyApplication.getInstance().getUnitAAList(); //???
-                MyApplication.getInstance().setUnitAAList(unitAAList);
+                unitList = MyApplication.getInstance().getUnitList(); //???
+                MyApplication.getInstance().setUnitList(unitList);
             } else {
-                if (MyApplication.getInstance().getUnitAAList() != null) {
-                    if (MyApplication.getInstance().getUnitAAList().size()>0) {
-                        // setup count exists, getUnitAAList not null and size > 0
-                        unitAAList = MyApplication.getInstance().getUnitAAList(); //???
-                        MyApplication.getInstance().setUnitAAList(unitAAList);
+                if (MyApplication.getInstance().getUnitList() != null) {
+                    if (MyApplication.getInstance().getUnitList().size()>0) {
+                        // setup count exists, getUnitList not null and size > 0
+                        unitList = MyApplication.getInstance().getUnitList(); //???
+                        MyApplication.getInstance().setUnitList(unitList);
                     } else {
-                        // setup count exists, getUnitAAList not null and size ! > 0
-                        unitAAList = getAll();
+                        // setup count exists, getUnitList not null and size ! > 0
+                        unitList = getAll();
                     }
                 } else {
-                    // setup count exists, getUnitAAList is null
-                    unitAAList = getAll();
-                    MyApplication.getInstance().setUnitAAList(unitAAList);
+                    // setup count exists, getUnitList is null
+                    unitList = getAll();
+                    MyApplication.getInstance().setUnitList(unitList);
                 }
             }
         } else {
@@ -63,82 +63,82 @@ public class old_Fragment_Unit extends Fragment {
             prefs.bonusSouls().put(0);
             prefs.moonRocks().put(0);
             setupDB();
-            unitAAList = getAll();
+            unitList = getAll();
 
-            MyApplication.getInstance().setUnitAAList(unitAAList);
+            MyApplication.getInstance().setUnitList(unitList);
             prefs.setupCount().put(setupCount);
         }
 
 
-        //unitAdapter = new UnitAdapter(getActivity(), R.layout.unit_row, unitAAList, Fragment_Unit.this);
+        //unitAdapter = new UnitAdapter(getActivity(), R.layout.unit_row, unitList, Fragment_Unit.this);
 
-//        unitAdapter = new UnitAdapter(getActivity(), R.layout.haxrow, unitAAList, Fragment_Unit.this);
+//        unitAdapter = new UnitAdapter(getActivity(), R.layout.haxrow, unitList, Fragment_Unit.this);
         lvUnits.setAdapter(unitAdapter);
 
     }
 
-    public static List<UnitAA> getAll() {
+    public static List<Unit> getAll() {
         //Log.d("Ryan", "units get all db query");
         return new Select()
-                .from(UnitAA.class)
+                .from(Unit.class)
                 .execute();
     }
 
     public void setupDB() {
         Category category = new Category();
-        category.name = "UnitAA";
+        category.name = "Unit";
         category.save();
 
-        UnitAA unit = new UnitAA();
+        Unit unit = new Unit();
         unit.category = category;
         unit.name="Minion";
         unit.cost=1;
         unit.rate=1;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Jelly";
         unit.cost=5;
         unit.rate=2;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Skelebro";
         unit.cost=10;
         unit.rate=3;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Cup Bearer";
         unit.cost=25;
         unit.rate=4;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Whelp";
         unit.cost=80;
         unit.rate=5;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Monolith";
         unit.cost=150;
         unit.rate=6;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Farmer";
         unit.cost=225;
         unit.rate=7;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Mule";
         unit.rate=8;
@@ -155,7 +155,7 @@ public class old_Fragment_Unit extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //unitAdapter = new UnitAdapter(getActivity(), R.layout.unit_row, unitAAList, Fragment_Unit.this);
+        //unitAdapter = new UnitAdapter(getActivity(), R.layout.unit_row, unitList, Fragment_Unit.this);
         lvUnits.setAdapter(unitAdapter);
     }
 

@@ -26,10 +26,10 @@ public class MainService extends Service {
             }
 
 
-            if (MyApplication.getInstance().getUnitAAList() != null) {
-                if (MyApplication.getInstance().getUnitAAList().size() > 0) {
-                    for (int i = 0; i < MyApplication.getInstance().getUnitAAList().size(); i++) {
-                        UnitAA un = MyApplication.getInstance().getUnitAAList().get(i);
+            if (MyApplication.getInstance().getUnitList() != null) {
+                if (MyApplication.getInstance().getUnitList().size() > 0) {
+                    for (int i = 0; i < MyApplication.getInstance().getUnitList().size(); i++) {
+                        Unit un = MyApplication.getInstance().getUnitList().get(i);
                         long owned = un.owned;
                         long rate = un.rate;
                         long pay = owned * rate;

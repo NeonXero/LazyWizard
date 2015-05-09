@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.activeandroid.UnitAA;
+import net.neonlotus.lazywizard.activeandroid.Unit;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -28,7 +28,7 @@ public class UnitAdapterRow extends LinearLayout {
         super(context);
     }
 
-    public void bind(UnitAA unitAA) {
-        tvName.setText(unitAA.name);
+    public void bind(Unit unit) {
+        tvName.setText(unit.name);
     }
 }
