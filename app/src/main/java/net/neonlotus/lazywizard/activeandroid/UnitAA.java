@@ -5,7 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 @Table(name = "Units")
-public class Unit extends Model {
+public class UnitAA extends Model {
 
     @Column(name = "Name")
     public String name;
@@ -33,10 +33,10 @@ public class Unit extends Model {
     @Column(name="UpgradeMulti")
     public long upgrademulti;
 
-    public Unit(){
+    public UnitAA(){
         super();
     }
-    public Unit(String name, Category category, long cost, long owned, long rate, long costmulti, long costbase, int upgradelevel, long upgrademulti){
+    public UnitAA(String name, Category category, long cost, long owned, long rate, long costmulti, long costbase, int upgradelevel, long upgrademulti){
         super();
         this.name = name;
         this.cost = cost;

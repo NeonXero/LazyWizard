@@ -6,7 +6,7 @@ import com.activeandroid.ActiveAndroid;
 
 import net.neonlotus.lazywizard.activeandroid.Item;
 import net.neonlotus.lazywizard.activeandroid.Tech;
-import net.neonlotus.lazywizard.activeandroid.Unit;
+import net.neonlotus.lazywizard.models.Unit;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class MyApplication extends Application {
             if (unitList.size() > 0) {
                 for (int i = 0; i < unitList.size(); i++) {
                     final Unit uNit = unitList.get(i);
-                    uNit.save();
+                    //uNit.save();
                 }
             }
         }
@@ -95,10 +95,10 @@ public class MyApplication extends Application {
     }
 
     /*public void clearAll() {
-        if (MyApplication.getInstance().getUnitList() != null) {
-            if (MyApplication.getInstance().getUnitList().size() > 0) {
-                for (int i = 0; i < MyApplication.getInstance().getUnitList().size(); i++) {
-                    final Unit uNit = MyApplication.getInstance().getUnitList().get(i);
+        if (MyApplication.getInstance().getUnitAAList() != null) {
+            if (MyApplication.getInstance().getUnitAAList().size() > 0) {
+                for (int i = 0; i < MyApplication.getInstance().getUnitAAList().size(); i++) {
+                    final UnitAA uNit = MyApplication.getInstance().getUnitAAList().get(i);
                     uNit.owned = 0;
                     uNit.rate = 1;
                     uNit.cost = 1;

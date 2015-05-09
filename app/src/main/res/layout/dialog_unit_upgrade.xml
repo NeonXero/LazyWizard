@@ -13,7 +13,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/llUpOne">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -41,7 +42,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/llUpTwo">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -69,7 +71,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/llUpThree">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -97,7 +100,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/llUpFour">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -125,7 +129,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/llUpFive">
 
         <CheckBox
             android:layout_width="wrap_content"
