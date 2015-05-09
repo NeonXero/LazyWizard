@@ -62,10 +62,10 @@ public class old_Fragment_Arcane extends Fragment {
     @Click(R.id.btnMotivation)
     void motivate() {
         if (MainActivity.checkSouls(1000000000)) {
-            List<Unit> unitList = MyApplication.getInstance().getUnitList();
-            long currentRate = unitList.get(0).rate;
-            unitList.get(0).rate = currentRate * 2;
-            MyApplication.getInstance().setUnitList(unitList);
+            List<UnitAA> unitAAList = MyApplication.getInstance().getUnitAAList();
+            long currentRate = unitAAList.get(0).rate;
+            unitAAList.get(0).rate = currentRate * 2;
+            MyApplication.getInstance().setUnitAAList(unitAAList);
             prefs.souls().put(prefs.souls().get() - 1000000000);
             MainActivity.updateSouls();
         } else {

@@ -254,35 +254,35 @@ public class old_Fragment_Stats extends Fragment {
         prefs.bonusSouls().put(newBonus);
         prefs.souls().put(15 + newBonus);
 
-        List<Unit> unitList = MyApplication.getInstance().getUnitList();
+        List<UnitAA> unitAAList = MyApplication.getInstance().getUnitAAList();
         List<Tech> techList = MyApplication.getInstance().getTechList();
         List<Item> itemList = MyApplication.getInstance().getItemList();
 
-        for (int i = 0; i < unitList.size(); i++) {
-            unitList.get(i).owned = 0;
+        for (int i = 0; i < unitAAList.size(); i++) {
+            unitAAList.get(i).owned = 0;
             if (techList != null)
                 techList.get(i).owned = 0;
             //if (itemList != null)
             //itemList.get(i).owned = 0;
         }
 
-        unitList.get(0).cost = 1;
-        unitList.get(1).cost = 5;
-        unitList.get(2).cost = 10;
-        unitList.get(3).cost = 25;
-        unitList.get(4).cost = 80;
-        unitList.get(5).cost = 150;
-        unitList.get(6).cost = 225;
-        unitList.get(7).cost = 500;
+        unitAAList.get(0).cost = 1;
+        unitAAList.get(1).cost = 5;
+        unitAAList.get(2).cost = 10;
+        unitAAList.get(3).cost = 25;
+        unitAAList.get(4).cost = 80;
+        unitAAList.get(5).cost = 150;
+        unitAAList.get(6).cost = 225;
+        unitAAList.get(7).cost = 500;
 
-        unitList.get(0).rate = 1;
-        unitList.get(1).rate = 2;
-        unitList.get(2).rate = 3;
-        unitList.get(3).rate = 4;
-        unitList.get(4).rate = 5;
-        unitList.get(5).rate = 6;
-        unitList.get(6).rate = 7;
-        unitList.get(7).rate = 8;
+        unitAAList.get(0).rate = 1;
+        unitAAList.get(1).rate = 2;
+        unitAAList.get(2).rate = 3;
+        unitAAList.get(3).rate = 4;
+        unitAAList.get(4).rate = 5;
+        unitAAList.get(5).rate = 6;
+        unitAAList.get(6).rate = 7;
+        unitAAList.get(7).rate = 8;
 
         if (techList != null) {
             techList.get(0).cost = 1;
@@ -315,7 +315,7 @@ public class old_Fragment_Stats extends Fragment {
             itemList.get(7).cost = 10000;
         }*//*
 
-        MyApplication.getInstance().setUnitList(unitList);
+        MyApplication.getInstance().setUnitAAList(unitAAList);
         MyApplication.getInstance().setTechList(techList);
         MyApplication.getInstance().setItemList(itemList);
         MyApplication.getInstance().saveAll();

@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.neonlotus.lazywizard">
 
-    <application android:name="com.activeandroid.app.Application"
+    <application
         android:allowBackup="true"
         android:icon="@drawable/lwicon"
-        android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon">
+        tools:replace="android:icon"
+        android:label="@string/app_name">
         <activity
             android:name=".MainActivity_"
             android:label="@string/app_name"
@@ -23,12 +23,12 @@
             android:name=".views.CharacterDialog"
             android:theme="@android:style/Theme.Dialog"></activity>
 
-        <meta-data
+        <!--<meta-data
             android:name="AA_DB_NAME"
             android:value="LazyWizard.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1" />
+            android:value="1" />-->
 
         <service
             android:name="net.neonlotus.lazywizard.application.MainService"
@@ -42,3 +42,10 @@
 </manifest>
 <!-- com.activeandroid.app.Application -->
     <!-- net.neonlotus.lazywizard.application.MyApplication_ -->
+
+    <!--<application android:name="com.activeandroid.app.Application"
+        android:allowBackup="true"
+        android:icon="@drawable/lwicon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">-->

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.IconButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +19,9 @@ import com.afollestad.materialdialogs.Theme;
 import net.neonlotus.lazywizard.Fragments.frag_Unit;
 import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
-import net.neonlotus.lazywizard.activeandroid.Unit;
 import net.neonlotus.lazywizard.application.MyApplication;
 import net.neonlotus.lazywizard.application.Prefs_;
+import net.neonlotus.lazywizard.models.Unit;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -132,10 +133,10 @@ MyApplication app;
         positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
 
         final TextView data = (TextView) dialog.getCustomView().findViewById(R.id.tvData);
-        //data.setText("Owned: "+thisUnit.owned+"\nProducing: "+thisUnit.rate*thisUnit.owned);
+        //data.setText("Owned: "+thisUnitAA.owned+"\nProducing: "+thisUnitAA.rate*thisUnitAA.owned);
         data.setText("Owned: "+
                 NumberFormat.getNumberInstance(Locale.US).format(thisUnit.owned)
-                +"\nProducing: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.rate*thisUnit.owned));
+                +"\nProducing: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.rate* thisUnit.owned));
 
 //tvSouls.setText(NumberFormat.getNumberInstance(Locale.US).format(souls));
 
@@ -165,8 +166,8 @@ MyApplication app;
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
-                //updateTextViews(thisUnit, one, ten, fifty, hundred);
-                app.getUnitList().set(position,thisUnit);
+                //updateTextViews(thisUnitAA, one, ten, fifty, hundred);
+                app.getUnitList().set(position, thisUnit);
                 MainActivity.updateSouls();
                 updateButtonViews(thisUnit, bone, bten, bfifty, bhundred, data);
             }
@@ -184,8 +185,8 @@ MyApplication app;
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
-                //updateTextViews(thisUnit, one, ten, fifty, hundred);
-                app.getUnitList().set(position,thisUnit);
+                //updateTextViews(thisUnitAA, one, ten, fifty, hundred);
+                app.getUnitList().set(position, thisUnit);
                 MainActivity.updateSouls();
                 updateButtonViews(thisUnit, bone, bten, bfifty, bhundred, data);
             }
@@ -203,8 +204,8 @@ MyApplication app;
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
-                //updateTextViews(thisUnit, one, ten, fifty, hundred);
-                app.getUnitList().set(position,thisUnit);
+                //updateTextViews(thisUnitAA, one, ten, fifty, hundred);
+                app.getUnitList().set(position, thisUnit);
                 MainActivity.updateSouls();
                 updateButtonViews(thisUnit, bone, bten, bfifty, bhundred, data);
             }
@@ -222,8 +223,8 @@ MyApplication app;
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
-                //updateTextViews(thisUnit, one, ten, fifty, hundred);
-                app.getUnitList().set(position,thisUnit);
+                //updateTextViews(thisUnitAA, one, ten, fifty, hundred);
+                app.getUnitList().set(position, thisUnit);
                 MainActivity.updateSouls();
                 updateButtonViews(thisUnit, bone, bten, bfifty, bhundred,data);
             }
@@ -278,93 +279,99 @@ MyApplication app;
         final Button i4 = (Button) dialog.getCustomView().findViewById(R.id.inFour);
         final Button i5 = (Button) dialog.getCustomView().findViewById(R.id.inFive);
 
+        final LinearLayout lOne = (LinearLayout) dialog.getCustomView().findViewById(R.id.llUpOne);
+        final LinearLayout lTwo = (LinearLayout) dialog.getCustomView().findViewById(R.id.llUpTwo);
+        final LinearLayout lThree = (LinearLayout) dialog.getCustomView().findViewById(R.id.llUpThree);
+        final LinearLayout lFour = (LinearLayout) dialog.getCustomView().findViewById(R.id.llUpFour);
+        final LinearLayout lFive = (LinearLayout) dialog.getCustomView().findViewById(R.id.llUpFive);
+
         final TextView data = (TextView) dialog.getCustomView().findViewById(R.id.tvDataUpgrade);
 
-        updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data);
+        updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.checkSouls(1*thisUnit.upgrademulti)) {
+                if (MainActivity.checkSouls(1* thisUnit.upgrademulti)) {
                     c1.setChecked(true);
                     b1.setEnabled(false);
-                    p.souls().put(p.souls().get()-1*thisUnit.upgrademulti);
+                    p.souls().put(p.souls().get()-1* thisUnit.upgrademulti);
                     thisUnit.upgradelevel++;
                     thisUnit.rate = thisUnit.rate*2;
-                    thisUnit.save();
+                    //thisUnit.save();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.checkSouls(2*thisUnit.upgrademulti)) {
+                if (MainActivity.checkSouls(2* thisUnit.upgrademulti)) {
                     c2.setChecked(true);
                     b2.setEnabled(false);
-                    p.souls().put(p.souls().get()-2*thisUnit.upgrademulti);
+                    p.souls().put(p.souls().get()-2* thisUnit.upgrademulti);
                     thisUnit.upgradelevel++;
                     thisUnit.rate = thisUnit.rate*2;
-                    thisUnit.save();
+                    //thisUnitAA.save();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.checkSouls(3*thisUnit.upgrademulti)) {
+                if (MainActivity.checkSouls(3* thisUnit.upgrademulti)) {
                     c2.setChecked(true);
                     b2.setEnabled(false);
-                    p.souls().put(p.souls().get()-3*thisUnit.upgrademulti);
+                    p.souls().put(p.souls().get()-3* thisUnit.upgrademulti);
                     thisUnit.upgradelevel++;
                     thisUnit.rate = thisUnit.rate*2;
-                    thisUnit.save();
+                    //thisUnitAA.save();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
             }
         });
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.checkSouls(4*thisUnit.upgrademulti)) {
+                if (MainActivity.checkSouls(4* thisUnit.upgrademulti)) {
                     c2.setChecked(true);
                     b2.setEnabled(false);
-                    p.souls().put(p.souls().get()-4*thisUnit.upgrademulti);
+                    p.souls().put(p.souls().get()-4* thisUnit.upgrademulti);
                     thisUnit.upgradelevel++;
                     thisUnit.rate = thisUnit.rate*2;
-                    thisUnit.save();
+                    //thisUnitAA.save();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
             }
         });
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.checkSouls(5*thisUnit.upgrademulti)) {
+                if (MainActivity.checkSouls(5* thisUnit.upgrademulti)) {
                     c2.setChecked(true);
                     b2.setEnabled(false);
-                    p.souls().put(p.souls().get()-5*thisUnit.upgrademulti);
+                    p.souls().put(p.souls().get()-5* thisUnit.upgrademulti);
                     thisUnit.upgradelevel++;
                     thisUnit.rate = thisUnit.rate*2;
-                    thisUnit.save();
+                    //thisUnitAA.save();
                 } else {
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
             }
         });
 
@@ -376,7 +383,7 @@ MyApplication app;
                 /*Snackbar.with(getContext()) // context
                         .text("Single-line snackbar") // text to display
                         .show(((MainActivity)getContext())); // activity where it is displayed*/
-                Toast.makeText(getContext(),""+1*thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),""+1* thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
             }
         });
         i2.setOnClickListener(new View.OnClickListener() {
@@ -387,25 +394,25 @@ MyApplication app;
                                 .type(SnackbarType.MULTI_LINE)
                                 .duration(Snackbar.SnackbarDuration.LENGTH_LONG)
                                 .text("Snazzy Snackbar popup that shows you some information"));*/
-                Toast.makeText(getContext(),""+2*thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),""+2* thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
             }
         });
         i3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),""+3*thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),""+3* thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
             }
         });
         i4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),""+4*thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),""+4* thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
             }
         });
         i5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),""+5*thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),""+5* thisUnit.upgrademulti+" souls",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -436,7 +443,7 @@ MyApplication app;
         final TextView generating = (TextView) dialog.getCustomView().findViewById(R.id.tvGenerating);
 
         owned.setText("Owned: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.owned));
-        long gen = thisUnit.owned*thisUnit.rate;
+        long gen = thisUnit.owned* thisUnit.rate;
         generating.setText("Generating: "+NumberFormat.getNumberInstance(Locale.US).format(gen));
 
 
@@ -486,16 +493,21 @@ MyApplication app;
         fifty.setText("BUY 50\n"+NumberFormat.getNumberInstance(Locale.US).format(fiftyBuy));
         hundred.setText("BUY 100\n"+NumberFormat.getNumberInstance(Locale.US).format(hundredBuy));
 
-        //data.setText("Owned: "+thisUnit.owned+"\nProducing: "+thisUnit.rate*thisUnit.owned);
+        //data.setText("Owned: "+thisUnitAA.owned+"\nProducing: "+thisUnitAA.rate*thisUnitAA.owned);
         data.setText("Owned: "+
                 NumberFormat.getNumberInstance(Locale.US).format(thisUnit.owned)
-                +"\nProducing: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.rate*thisUnit.owned));
+                +"\nProducing: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.rate* thisUnit.owned));
     }
 
-    public void updateUpgradeViews(Unit thisUnit, CheckBox c1, CheckBox c2, CheckBox c3, CheckBox c4, CheckBox c5, Button b1, Button b2, Button b3, Button b4, Button b5, Button i1, Button i2, Button i3, Button i4, Button i5, TextView data) {
-        data.setText("Level "+thisUnit.upgradelevel);
+    public void updateUpgradeViews(Unit thisUnit, CheckBox c1, CheckBox c2, CheckBox c3, CheckBox c4, CheckBox c5, Button b1, Button b2, Button b3, Button b4, Button b5, Button i1, Button i2, Button i3, Button i4, Button i5, TextView data, LinearLayout lOne, LinearLayout lTwo, LinearLayout lThree, LinearLayout lFour, LinearLayout lFive) {
+        data.setText("Level "+ thisUnit.upgradelevel);
         switch (thisUnit.upgradelevel) {
             case 0:
+                lTwo.setVisibility(View.GONE);
+                lThree.setVisibility(View.GONE);
+                lFour.setVisibility(View.GONE);
+                lFive.setVisibility(View.GONE);
+
                 c1.setChecked(false);
                 c2.setChecked(false);
                 c3.setChecked(false);
@@ -515,6 +527,11 @@ MyApplication app;
                 i5.setEnabled(false);
                 break;
             case 1:
+                lTwo.setVisibility(View.VISIBLE);
+                lThree.setVisibility(View.GONE);
+                lFour.setVisibility(View.GONE);
+                lFive.setVisibility(View.GONE);
+
                 c1.setChecked(true);
                 c2.setChecked(false);
                 c3.setChecked(false);
@@ -534,6 +551,11 @@ MyApplication app;
                 i5.setEnabled(false);
                 break;
             case 2:
+                lTwo.setVisibility(View.VISIBLE);
+                lThree.setVisibility(View.VISIBLE);
+                lFour.setVisibility(View.GONE);
+                lFive.setVisibility(View.GONE);
+
                 c1.setChecked(true);
                 c2.setChecked(true);
                 c3.setChecked(false);
@@ -553,6 +575,12 @@ MyApplication app;
                 i5.setEnabled(false);
                 break;
             case 3:
+
+                lTwo.setVisibility(View.VISIBLE);
+                lThree.setVisibility(View.VISIBLE);
+                lFour.setVisibility(View.VISIBLE);
+                lFive.setVisibility(View.GONE);
+
                 c1.setChecked(true);
                 c2.setChecked(true);
                 c3.setChecked(true);
@@ -572,6 +600,11 @@ MyApplication app;
                 i5.setEnabled(false);
                 break;
             case 4:
+                lTwo.setVisibility(View.VISIBLE);
+                lThree.setVisibility(View.VISIBLE);
+                lFour.setVisibility(View.VISIBLE);
+                lFive.setVisibility(View.VISIBLE);
+
                 c1.setChecked(true);
                 c2.setChecked(true);
                 c3.setChecked(true);
