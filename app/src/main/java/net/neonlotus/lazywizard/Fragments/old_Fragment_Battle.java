@@ -140,7 +140,7 @@ public class old_Fragment_Battle extends Fragment {
         int us = 0;
 
         for (int i=1;i<9;i++) {
-            final Unit u = Unit.load(Unit.class,i);
+            final UnitAA u = UnitAA.load(UnitAA.class,i);
             if (u.owned>0) {
                 switch (i) {
                     case 1:
@@ -184,7 +184,7 @@ public class old_Fragment_Battle extends Fragment {
 
         int dog = fight(); //0, 1, 2
         if (dog==0) {
-            final Unit u = Unit.load(Unit.class,1);
+            final UnitAA u = UnitAA.load(UnitAA.class,1);
             if (u.owned>0) {
                 u.owned--;
                 u.save();
@@ -193,7 +193,7 @@ public class old_Fragment_Battle extends Fragment {
         } else if (dog==1) {
             //nothing
         } else {
-            final Unit u = Unit.load(Unit.class,1);
+            final UnitAA u = UnitAA.load(UnitAA.class,1);
             u.owned++;
             u.save();
         }
@@ -213,7 +213,7 @@ public class old_Fragment_Battle extends Fragment {
     *//*public void setupSeekBar() {
         unitTotal = 0;
         for (int i=1;i<9;i++) {
-            final Unit u = Unit.load(Unit.class,i);
+            final UnitAA u = UnitAA.load(UnitAA.class,i);
             unitTotal += u.owned;
         }
 

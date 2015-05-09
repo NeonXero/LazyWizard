@@ -131,7 +131,7 @@ public class LabAdapter extends ArrayAdapter<Tech> {
         });
 
         final Tech dTech = techList.get(position);
-        ////final Unit dUnit = MyApplication.getInstance().getUnitList().get(position);
+        ////final UnitAA dUnit = MyApplication.getInstance().getUnitAAList().get(position);
         //viewHolder.viewName.setText(dTech.name+" "+dTech.owned);
         viewHolder.viewName.setText(dTech.name);
         viewHolder.viewCount.setText("Owned: "+ NumberFormat.getNumberInstance(Locale.US).format(dTech.owned));
@@ -415,7 +415,7 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                     }
 
                ////     MyApplication.getInstance().getTechList().get(position).cost = (baseCost + (oNew * multiCost));
-                    //MyApplication.getInstance().getUnitList().get(position).rate+= (dTech.rate*50);
+                    //MyApplication.getInstance().getUnitAAList().get(position).rate+= (dTech.rate*50);
                ////     dUnit.rate = (dTech.rate+oNew);
                     MainActivity.updateSouls();
                 } else {
@@ -502,7 +502,7 @@ public class LabAdapter extends ArrayAdapter<Tech> {
                     }
 
               ////      dTech.cost = (baseCost + (oNew * multiCost));
-                    //MyApplication.getInstance().getUnitList().get(position).rate+= (dTech.rate*100);
+                    //MyApplication.getInstance().getUnitAAList().get(position).rate+= (dTech.rate*100);
               ////      dUnit.rate = (dTech.rate+oNew);
                     MainActivity.updateSouls();
                 } else {

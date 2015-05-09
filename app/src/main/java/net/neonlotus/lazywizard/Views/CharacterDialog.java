@@ -31,7 +31,7 @@ public class CharacterDialog extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final Unit dUnit = Unit.load(Unit.class, 2);
+//                final UnitAA dUnit = UnitAA.load(UnitAA.class, 2);
 //                dUnit.owned+=100;
 //                dUnit.save();
 //                MainActivity.updateSouls();

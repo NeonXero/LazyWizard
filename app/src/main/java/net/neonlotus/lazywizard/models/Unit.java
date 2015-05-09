@@ -1,16 +1,24 @@
 package net.neonlotus.lazywizard.models;
 
 public class Unit {
-    private String name;
-    private int count;
-    private int cost;
-    private int id;
+    public String name;
+    public long cost;
+    public long costbase;
+    public long costmulti;
+    public long owned;
+    public long rate;
+    public int upgradelevel;
+    public long upgrademulti;
 
-    public Unit(String name, int count, int cost, int id) {
+    public Unit(String name, long cost, long costbase, long costmulti, long owned, long rate, int upgradelevel, long upgrademulti) {
         this.name = name;
-        this.count = count;
         this.cost = cost;
-        this.id = id;
+        this.costbase = costbase;
+        this.costmulti = costmulti;
+        this.owned = owned;
+        this.rate = rate;
+        this.upgradelevel = upgradelevel;
+        this.upgrademulti = upgrademulti;
     }
 
     public String getName() {
@@ -21,27 +29,59 @@ public class Unit {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getCost() {
+    public long getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 
-    public int getId() {
-        return id;
+    public long getCostbase() {
+        return costbase;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCostbase(long costbase) {
+        this.costbase = costbase;
+    }
+
+    public long getCostmulti() {
+        return costmulti;
+    }
+
+    public void setCostmulti(long costmulti) {
+        this.costmulti = costmulti;
+    }
+
+    public long getOwned() {
+        return owned;
+    }
+
+    public void setOwned(long owned) {
+        this.owned = owned;
+    }
+
+    public long getRate() {
+        return rate;
+    }
+
+    public void setRate(long rate) {
+        this.rate = rate;
+    }
+
+    public int getUpgradelevel() {
+        return upgradelevel;
+    }
+
+    public void setUpgradelevel(int upgradelevel) {
+        this.upgradelevel = upgradelevel;
+    }
+
+    public long getUpgrademulti() {
+        return upgrademulti;
+    }
+
+    public void setUpgrademulti(long upgrademulti) {
+        this.upgrademulti = upgrademulti;
     }
 }
