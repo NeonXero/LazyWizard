@@ -38,17 +38,12 @@ dependencies {
     // add these
     compile 'org.androidannotations:androidannotations-api:3.0+'
     // two lines
-
-    //compile files('libs/ActiveAndroid-3.3.jar')
-
+    compile files('libs/ActiveAndroid-3.3.jar')
     compile 'com.github.traex.expandablelayout:library:1.2.2'
     compile 'com.googlecode.android-wheel:datetime-picker:1.1'
     compile 'com.nispok:snackbar:2.9.1'
     compile 'com.android.support:appcompat-v7:21.0.0+'
     compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.1'
     compile 'com.afollestad:material-dialogs:0.6.3.1'
-    compile 'com.sothree.slidinguppanel:library:3.0.0'
 
-    compile 'com.snappydb:snappydb-lib:0.5.0'
-    compile 'com.esotericsoftware.kryo:kryo:2.24.0'
 }

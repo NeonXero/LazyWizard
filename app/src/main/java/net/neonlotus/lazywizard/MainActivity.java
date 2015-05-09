@@ -8,33 +8,27 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import com.snappydb.DB;
-import com.snappydb.DBFactory;
-import com.snappydb.SnappydbException;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.activeandroid.query.Select;
 
-import net.neonlotus.lazywizard.Fragments.frag_Stats_;
 import net.neonlotus.lazywizard.Fragments.frag_Unit_;
+import net.neonlotus.lazywizard.activeandroid.Category;
+import net.neonlotus.lazywizard.activeandroid.Item;
+import net.neonlotus.lazywizard.activeandroid.Unit;
 import net.neonlotus.lazywizard.application.MainService;
 import net.neonlotus.lazywizard.application.MyApplication;
 import net.neonlotus.lazywizard.application.Prefs_;
-import net.neonlotus.lazywizard.models.Unit;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends FragmentActivity {
@@ -45,32 +39,25 @@ public class MainActivity extends FragmentActivity {
     @ViewById
     static TextView tvSouls;
 
-    @ViewById
-    SlidingUpPanelLayout slidingLayout;
-    @ViewById
-    TextView tvSlideTitle;
-
     static ActionBar ab;
 
-    //List<Item> itemList;
-    //List<Item> headItems, armorItems, weaponItems, accessoryItems;
+    List<Item> itemList;
+    List<Item> headItems, armorItems, weaponItems, accessoryItems;
 
-    static List<Unit> unitList = new ArrayList<>();
+    static List<Unit> unitList;
 
     MyApplication app;
 
     static long souls;
     FragmentTransaction ft;
-    static DB snappydb;
+
 
     frag_Unit_ fragUnit;
-    frag_Stats_ fragStats;
 
     @AfterInject
     void onAfterInject() {
 
         fragUnit = new frag_Unit_();
-        fragStats = new frag_Stats_();
     }
 
     @AfterViews
@@ -87,18 +74,18 @@ public class MainActivity extends FragmentActivity {
 
 
         //Get Units
-        int setupCount = 0;
+        int setupCount=0;
         if (prefs.setupCount().exists()) {
             //nothing for now
-            setupUnits();
         } else {
-            setupUnits();
+            setupUnitDatabase();
         }
 
         prefs.setupCount().put(setupCount);
         this.unitList = getAllUnits();
         souls = prefs.souls().get();
         tvSouls.setText(NumberFormat.getNumberInstance(Locale.US).format(souls));
+
 
 
         final Handler mHandler = new Handler();
@@ -133,39 +120,14 @@ public class MainActivity extends FragmentActivity {
             }
         }).start();
 
-        slidingLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                //Log.i(TAG, "onPanelSlide, offset " + slideOffset);
-            }
-
-            @Override
-            public void onPanelExpanded(View panel) {
-                //Log.i(TAG, "onPanelExpanded");
-                tvSlideTitle.setText("Swipe or tap to close.");
-            }
-
-            @Override
-            public void onPanelCollapsed(View panel) {
-                tvSlideTitle.setText("Swipe up for more actions.");
-            }
-
-            @Override
-            public void onPanelAnchored(View panel) {
-                //Log.i(TAG, "onPanelAnchored");
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-                //Log.i(TAG, "onPanelHidden");
-            }
-        });
 
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("zz", "CREATE");
+
     }
 
     @Override
@@ -214,65 +176,36 @@ public class MainActivity extends FragmentActivity {
         tvSouls.setText(NumberFormat.getNumberInstance(Locale.US).format(souls));
     }
 
-    @Click(R.id.slideUnits)
-    void seeUnits() {
-        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-        FragmentManager fm = getFragmentManager();
-        ft = fm.beginTransaction();
-        ft.replace(R.id.container, fragUnit).commit();
-        ab.setTitle("Unit Summoning");
-    }
-
-    @Click(R.id.slideStats)
-    void seeStats() {
-        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-        FragmentManager fm = getFragmentManager();
-        ft = fm.beginTransaction();
-        ft.replace(R.id.container, fragStats).commit();
-        ab.setTitle("Wizard Stats");
-    }
 
 
-    public void setupUnits() {
-        Unit minion = new Unit("",-1,-1,-1,-1,-1,-1,-1);
-        minion.setName("Minion");
-        minion.setCost(1);
-        minion.setCostbase(1);
-        minion.setCostmulti(2);
-        minion.setRate(1);
-        minion.setOwned(0);
-        minion.setUpgradelevel(0);
-        minion.setUpgrademulti(100);
+    public void setupUnitDatabase() {
+        Category category = new Category();
+        category.name = "Unit";
+        category.save();
 
-        Unit wisp = new Unit("",-1,-1,-1,-1,-1,-1,-1);;
-        wisp.setName("Wisp");
-        wisp.setCost(5);
-        wisp.setCostbase(5);
-        wisp.setCostmulti(5);
-        wisp.setRate(2);
-        wisp.setOwned(0);
-        wisp.setUpgradelevel(0);
-        wisp.setUpgrademulti(200);
+        Unit unit = new Unit();
+        unit.category = category;
+        unit.name="Minion";
+        unit.cost=1;
+        unit.costbase=1;
+        unit.costmulti=2;
+        unit.rate=1;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 100;
+        unit.save();
 
-        //Unit[] builtUnits = {minion, wisp};
-        unitList.add(minion);
-        unitList.add(wisp);
+        unit = new Unit();
+        unit.category = category;
+        unit.name="Wisp";
+        unit.cost=5;
+        unit.costbase=5;
+        unit.costmulti=5;
+        unit.rate=2;
+        unit.upgradelevel = 0;
+        unit.upgrademulti = 200;
+        unit.save();
 
-
-        try {
-            snappydb = DBFactory.open(getApplication()); //create or open an existing databse using the default name
-            snappydb.put("u_minion", minion);
-            snappydb.put("u_wisp", wisp);
-            //snappydb.put("units",builtUnits);
-            snappydb.close();
-        } catch (SnappydbException e) {
-            Log.d("snap_error: ",e.getMessage());
-        }
-
-        /*
-
-
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Jester";
         unit.cost=10;
@@ -283,7 +216,7 @@ public class MainActivity extends FragmentActivity {
         unit.upgrademulti = 300;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Shaman";
         unit.cost=25;
@@ -294,7 +227,7 @@ public class MainActivity extends FragmentActivity {
         unit.upgrademulti = 400;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Hex Master";
         unit.cost=80;
@@ -305,7 +238,7 @@ public class MainActivity extends FragmentActivity {
         unit.upgrademulti = 500;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Shadowbeast";
         unit.cost=150;
@@ -316,7 +249,7 @@ public class MainActivity extends FragmentActivity {
         unit.upgrademulti = 600;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Elemental";
         unit.cost=225;
@@ -327,7 +260,7 @@ public class MainActivity extends FragmentActivity {
         unit.upgrademulti = 700;
         unit.save();
 
-        unit = new UnitAA();
+        unit = new Unit();
         unit.category = category;
         unit.name="Necromancer";
         unit.rate=8;
@@ -336,9 +269,8 @@ public class MainActivity extends FragmentActivity {
         unit.costmulti=814;
         unit.upgradelevel = 0;
         unit.upgrademulti = 800;
-        unit.save();*/
+        unit.save();
     }
-
 
     public void setupDB() {
 
@@ -348,7 +280,7 @@ public class MainActivity extends FragmentActivity {
 
         //========================== ITEMS
         //================================
-        /*Category category = new Category();
+        Category category = new Category();
         category = new Category();
         category.name = "Item";
         category.save();
@@ -463,58 +395,46 @@ public class MainActivity extends FragmentActivity {
         item.eqType="Accessory";
         item.rarity="Mystic";
         item.owned=true;
-        item.save();*/
+        item.save();
     }
 
-    public List<Unit> getAllUnits() {
-        /*try {
-            snappydb = DBFactory.open(MainActivity.this.getApplicationContext()); //create or open an existing databse using the default name
-            Unit[] units = snappydb.getObjectArray("units",Unit.class);
-            unitList = new ArrayList<Unit>(Arrays.asList(units));
-            //Unit x = snappydb.getObject("u_minion", Unit.class);
-        } catch (SnappydbException e) {
-            Log.d("snap_error",e.getMessage());
-        }*/
-
-
-
-        return unitList;
-        /*return new Select()
-                .from(UnitAA.class)
-                .execute();*/
+    public static List<Unit> getAllUnits() {
+        return new Select()
+                .from(Unit.class)
+                .execute();
     }
 
-    /*public static List<Item> getAll() {
+    public static List<Item> getAll() {
         return new Select()
                 .from(Item.class)
                 .execute();
-    }*/
+    }
 
-    /*public static List<Item> getHead() {
+    public static List<Item> getHead() {
         return new Select()
                 .from(Item.class)
                 //.where("eqType = ? AND owned = ?", "Head",1)
                 .where("eqType = ?", "Head")
                 .execute();
-    }*/
-    /*public static List<Item> getArmor() {
+    }
+    public static List<Item> getArmor() {
         return new Select()
                 .from(Item.class)
                 .where("eqType = ?", "Armor")
                 .execute();
-    }*/
-    /*public static List<Item> getWeapon() {
+    }
+    public static List<Item> getWeapon() {
         return new Select()
                 .from(Item.class)
                 .where("eqType = ?", "Weapon")
                 .execute();
-    }*/
-    /*public static List<Item> getAccessory() {
+    }
+    public static List<Item> getAccessory() {
         return new Select()
                 .from(Item.class)
                 .where("eqType = ?", "Accessory")
                 .execute();
-    }*/
+    }
 
 
 }

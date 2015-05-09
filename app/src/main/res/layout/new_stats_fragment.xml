@@ -7,52 +7,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Total Units Owned"
-        android:id="@+id/tvOwnedLabel" />
+        android:text="Total"
+        android:id="@+id/tvTotalUnits" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="xxx"
-
-        android:id="@+id/tvOwnedValue" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Total Upgrades Purchased"
-        android:id="@+id/tvUpgradeLabel" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="xxx"
-
-        android:id="@+id/tvUpgradeValue" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Souls Per Second"
-        android:id="@+id/tvProductionLabel" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="xxx"
-
-        android:id="@+id/tvProductionValue" />
+        android:text="$"
+        android:id="@+id/tvTotalRate" />
 </LinearLayout>
-
-    <!--real-->
