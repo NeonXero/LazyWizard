@@ -20,6 +20,9 @@ public class Unit {
         this.upgradelevel = upgradelevel;
         this.upgrademulti = upgrademulti;
     }
+    public Unit() {
+
+    }
 
     public String getName() {
         return name;

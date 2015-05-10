@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.IconButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
+import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import net.neonlotus.lazywizard.Fragments.frag_Unit;
 import net.neonlotus.lazywizard.MainActivity;
@@ -24,6 +26,7 @@ import net.neonlotus.lazywizard.application.Prefs_;
 import net.neonlotus.lazywizard.models.Unit;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,18 +38,40 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
 MyApplication app;
 
     List<Unit> unitList;
+    List<String> abc;
+    List<String> def;
+    List<List<String>> allUpgrades;
 
     frag_Unit fragment;
+    UpgradeUnitAdapter uuAdapter;
 
 
     public newUnitAdapter(Context context, int resource, List<Unit> items, frag_Unit fragment) {
         super(context, resource, items);
         this.unitList = items;
         this.fragment = fragment;
+        abc = new ArrayList<>();
+        def = new ArrayList<>();
+        allUpgrades = new ArrayList<>();
 
         app = MyApplication.getInstance();
+        abc.add("Balls");
+        abc.add("Dogs");
+       abc.add("Cats");
+        abc.add("House");
 
+        def.add("moose");
+        def.add("nuts");
+        def.add("rooster");
 
+        allUpgrades.add(abc);
+        allUpgrades.add(def);
+        allUpgrades.add(abc);
+        allUpgrades.add(def);
+        allUpgrades.add(abc);
+        allUpgrades.add(def);
+        allUpgrades.add(abc);
+        allUpgrades.add(def);
     }
 
     static class ViewHolder {
@@ -250,7 +275,7 @@ MyApplication app;
                 .customView(R.layout.dialog_unit_upgrade, true)
                 .positiveText("Close")
                 .theme(Theme.DARK)
-                .cancelable(false)
+                .cancelable(true)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
@@ -260,6 +285,17 @@ MyApplication app;
                 .build();
 
         positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
+
+        final NumberProgressBar progressBar = (NumberProgressBar) dialog.getCustomView().findViewById(R.id.number_progress_bar);
+        progressBar.setMax(5);
+        progressBar.setProgress(0);
+
+        final ListView list = (ListView) dialog.getCustomView().findViewById(R.id.listView);
+        //uuAdapter = new UpgradeUnitAdapter(getContext(), R.layout.upgrade_unit_row, unitList);
+        uuAdapter = new UpgradeUnitAdapter(getContext(), R.layout.upgrade_unit_row, this.allUpgrades.get(position));
+        list.setAdapter(uuAdapter);
+        //uuAdapter.notifyDataSetChanged();
+
 
         final CheckBox c1 = (CheckBox) dialog.getCustomView().findViewById(R.id.cbOne);
         final CheckBox c2 = (CheckBox) dialog.getCustomView().findViewById(R.id.cbTwo);
@@ -287,7 +323,7 @@ MyApplication app;
 
         final TextView data = (TextView) dialog.getCustomView().findViewById(R.id.tvDataUpgrade);
 
-        updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
+        updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive, progressBar);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -303,7 +339,7 @@ MyApplication app;
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive, progressBar);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
@@ -320,7 +356,7 @@ MyApplication app;
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive, progressBar);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
@@ -337,7 +373,7 @@ MyApplication app;
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive, progressBar);
             }
         });
         b4.setOnClickListener(new View.OnClickListener() {
@@ -354,7 +390,7 @@ MyApplication app;
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive, progressBar);
             }
         });
         b5.setOnClickListener(new View.OnClickListener() {
@@ -371,7 +407,7 @@ MyApplication app;
                     Toast.makeText(getContext(), "Not enough souls", Toast.LENGTH_SHORT).show();
                 }
                 MainActivity.updateSouls();
-                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive);
+                updateUpgradeViews(thisUnit, c1, c2, c3, c4, c5, b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, data, lOne, lTwo, lThree, lFour, lFive, progressBar);
             }
         });
 
@@ -499,8 +535,9 @@ MyApplication app;
                 +"\nProducing: "+NumberFormat.getNumberInstance(Locale.US).format(thisUnit.rate* thisUnit.owned));
     }
 
-    public void updateUpgradeViews(Unit thisUnit, CheckBox c1, CheckBox c2, CheckBox c3, CheckBox c4, CheckBox c5, Button b1, Button b2, Button b3, Button b4, Button b5, Button i1, Button i2, Button i3, Button i4, Button i5, TextView data, LinearLayout lOne, LinearLayout lTwo, LinearLayout lThree, LinearLayout lFour, LinearLayout lFive) {
+    public void updateUpgradeViews(Unit thisUnit, CheckBox c1, CheckBox c2, CheckBox c3, CheckBox c4, CheckBox c5, Button b1, Button b2, Button b3, Button b4, Button b5, Button i1, Button i2, Button i3, Button i4, Button i5, TextView data, LinearLayout lOne, LinearLayout lTwo, LinearLayout lThree, LinearLayout lFour, LinearLayout lFive, NumberProgressBar progress) {
         data.setText("Level "+ thisUnit.upgradelevel);
+        progress.setProgress(thisUnit.upgradelevel);
         switch (thisUnit.upgradelevel) {
             case 0:
                 lTwo.setVisibility(View.GONE);

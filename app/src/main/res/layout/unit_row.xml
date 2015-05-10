@@ -30,7 +30,7 @@
         <IconButton
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="{fa-usd}"
+            android:text="{fa-shopping-cart}"
             android:id="@+id/btnBuy"
              />
 
