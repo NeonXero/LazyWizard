@@ -8,6 +8,7 @@
         android:icon="@drawable/lwicon"
         android:theme="@style/AppTheme"
         tools:replace="android:icon"
+        android:name=".application.MyApplication"
         android:label="@string/app_name">
         <activity
             android:name=".MainActivity_"
@@ -34,7 +35,6 @@
             android:name="net.neonlotus.lazywizard.application.MainService"
             android:icon="@drawable/ic_launcher"
             android:label="Service"></service>
-
 
     </application>
 

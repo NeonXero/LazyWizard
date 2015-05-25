@@ -16,4 +16,68 @@
         <item>Mules</item>
     </string-array>
 
+    <string-array name="minion_upgrades">
+        <item>Curious Minions</item>
+        <item>Apprentice Minions</item>
+        <item>Adept Minions</item>
+        <item>Master Minion</item>
+        <item>Minion Overlord</item>
+    </string-array>
+
+    <string-array name="wisp_upgrades">
+        <item>Shimmering Wisp</item>
+        <item>Glowing Wisp</item>
+        <item>Iridescent Wisp</item>
+        <item>Ephemeral Wisp</item>
+        <item>Nova Wisp</item>
+    </string-array>
+
+    <string-array name="jester_upgrades">
+        <item>JSwag</item>
+        <item>JSwag2</item>
+        <item>JSwag3</item>
+        <item>JSwag4</item>
+        <item>JSwag5</item>
+    </string-array>
+
+    <string-array name="shaman_upgrades">
+        <item>JSwag</item>
+        <item>JSwag2</item>
+        <item>JSwag3</item>
+        <item>JSwag4</item>
+        <item>JSwag5</item>
+    </string-array>
+
+    <string-array name="hexmaster_upgrades">
+        <item>JSwag</item>
+        <item>JSwag2</item>
+        <item>JSwag3</item>
+        <item>JSwag4</item>
+        <item>JSwag5</item>
+    </string-array>
+
+    <string-array name="shadowbeast_upgrades">
+        <item>JSwag</item>
+        <item>JSwag2</item>
+        <item>JSwag3</item>
+        <item>JSwag4</item>
+        <item>JSwag5</item>
+    </string-array>
+
+    <string-array name="elemental_upgrades">
+        <item>JSwag</item>
+        <item>JSwag2</item>
+        <item>JSwag3</item>
+        <item>JSwag4</item>
+        <item>JSwag5</item>
+    </string-array>
+
+    <string-array name="necromancer_upgrades">
+        <item>JSwag</item>
+        <item>JSwag2</item>
+        <item>JSwag3</item>
+        <item>JSwag4</item>
+        <item>JSwag5</item>
+    </string-array>
+
 </resources>

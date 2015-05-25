@@ -1,6 +1,7 @@
 package net.neonlotus.lazywizard.application;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 
@@ -13,16 +14,16 @@ import java.util.List;
 
 public class MyApplication extends Application {
 
-
-
+    //static DB snappydb;
+    public static Context context;
 
     public void onCreate() {
         super.onCreate();
+        MyApplication.context = getApplicationContext();
         //initSomeStuff();
         //dog = "dog";
         ActiveAndroid.initialize(this);
     }
-
 
 
     //private static MyApplication mInstance = null;
@@ -64,35 +65,7 @@ public class MyApplication extends Application {
         return b;
     }
 
-    public void saveAll() {
-        if (unitList != null) {
-            if (unitList.size() > 0) {
-                for (int i = 0; i < unitList.size(); i++) {
-                    final Unit uNit = unitList.get(i);
-                    //uNit.save();
-                }
-            }
-        }
 
-        /*if (MyApplication.getInstance().getTechList() != null) {
-            if (MyApplication.getInstance().getTechList().size() > 0) {
-                for (int i = 0; i < MyApplication.getInstance().getTechList().size(); i++) {
-                    final Tech tEch = MyApplication.getInstance().getTechList().get(i);
-                    tEch.save();
-                }
-            }
-        }*/
-
-       /* if (MyApplication.getInstance().getItemList() != null) {
-            if (MyApplication.getInstance().getItemList().size() > 0) {
-                for (int i = 0; i < MyApplication.getInstance().getItemList().size(); i++) {
-                    final Item iTem = MyApplication.getInstance().getItemList().get(i);
-                    iTem.save();
-                }
-            }
-        }*/
-
-    }
 
     /*public void clearAll() {
         if (MyApplication.getInstance().getUnitAAList() != null) {

@@ -27,6 +27,7 @@ import net.neonlotus.lazywizard.models.Unit;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,8 +39,8 @@ public class newUnitAdapter extends ArrayAdapter<Unit> {
 MyApplication app;
 
     List<Unit> unitList;
-    List<String> abc;
-    List<String> def;
+    //List<String> abc;
+    //List<String> def;
     List<List<String>> allUpgrades;
 
     frag_Unit fragment;
@@ -50,28 +51,40 @@ MyApplication app;
         super(context, resource, items);
         this.unitList = items;
         this.fragment = fragment;
-        abc = new ArrayList<>();
-        def = new ArrayList<>();
+        //abc = new ArrayList<>();
+        //def = new ArrayList<>();
         allUpgrades = new ArrayList<>();
 
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.minion_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.wisp_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.jester_upgrades))));
+
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.minion_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.wisp_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.jester_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.minion_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.wisp_upgrades))));
+        allUpgrades.add(new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.jester_upgrades))));
+
+
         app = MyApplication.getInstance();
-        abc.add("Balls");
+        /*abc.add("Balls");
         abc.add("Dogs");
        abc.add("Cats");
         abc.add("House");
 
         def.add("moose");
         def.add("nuts");
-        def.add("rooster");
+        def.add("rooster");*/
 
-        allUpgrades.add(abc);
+        /*allUpgrades.add(abc);
         allUpgrades.add(def);
         allUpgrades.add(abc);
         allUpgrades.add(def);
         allUpgrades.add(abc);
         allUpgrades.add(def);
         allUpgrades.add(abc);
-        allUpgrades.add(def);
+        allUpgrades.add(def);*/
     }
 
     static class ViewHolder {
@@ -292,9 +305,10 @@ MyApplication app;
 
         final ListView list = (ListView) dialog.getCustomView().findViewById(R.id.listView);
         //uuAdapter = new UpgradeUnitAdapter(getContext(), R.layout.upgrade_unit_row, unitList);
-        uuAdapter = new UpgradeUnitAdapter(getContext(), R.layout.upgrade_unit_row, this.allUpgrades.get(position));
+        //uuAdapter = new UpgradeUnitAdapter(getContext(), R.layout.upgrade_unit_row, this.allUpgrades.get(position));
+        uuAdapter = new UpgradeUnitAdapter(getContext(), R.layout.upgrade_unit_row, this.allUpgrades.get(position), progressBar);
         list.setAdapter(uuAdapter);
-        //uuAdapter.notifyDataSetChanged();
+        uuAdapter.notifyDataSetChanged();
 
 
         final CheckBox c1 = (CheckBox) dialog.getCustomView().findViewById(R.id.cbOne);
@@ -488,7 +502,9 @@ MyApplication app;
     }
 
     public void goAway(MaterialDialog md) {
-        app.saveAll();
+        //app.saveAll();
+        //saveAll();
+        MainActivity.saveAll();
         md.dismiss();
     }
 
@@ -683,6 +699,8 @@ MyApplication app;
                 break;
         }
     }
+
+
 
 
 

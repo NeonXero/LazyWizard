@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
+
 import net.neonlotus.lazywizard.MainActivity;
 import net.neonlotus.lazywizard.R;
 import net.neonlotus.lazywizard.application.MyApplication;
@@ -22,12 +24,14 @@ public class UpgradeUnitAdapter extends ArrayAdapter<String> {
 
     List<Unit> unitList;
     List<String> abc;
+    NumberProgressBar progbar;
 
     //public UpgradeUnitAdapter(Context context, int resource, List<Unit> items) {
-    public UpgradeUnitAdapter(Context context, int resource, List<String> items) {
+    public UpgradeUnitAdapter(Context context, int resource, List<String> items, NumberProgressBar prog) {
         super(context, resource, items);
         this.unitList = MainActivity.getUnits();
         this.abc = items;
+        this.progbar = prog;
 
         app = MyApplication.getInstance();
     }
@@ -55,7 +59,21 @@ public class UpgradeUnitAdapter extends ArrayAdapter<String> {
         }
 
         //viewHolder.upgradeMe.setText("Cool upgrade "+position+"\nCosts "+unitList.get(position).getUpgrademulti());
-        viewHolder.upgradeMe.setText("Cool upgrade "+abc.get(position)+"\nCosts "+unitList.get(position).getUpgrademulti());
+        viewHolder.upgradeMe.setText(""+abc.get(position)+"\nCosts "+unitList.get(position).getUpgrademulti());
+        for (int i=0;i<unitList.size();i++) {
+            if (unitList.get(i).upgradelevel>position) {
+                viewHolder.upgradeMe.setEnabled(false);
+            } else {
+                viewHolder.upgradeMe.setEnabled(true);
+            }
+        }
+
+        viewHolder.upgradeMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progbar.setProgress(unitList.get(position).upgradelevel++);
+            }
+        });
 
         /*final Unit dUnit = unitList.get(position);
         viewHolder.viewName.setText(dUnit.name);
